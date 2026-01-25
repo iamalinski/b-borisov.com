@@ -10,8 +10,8 @@ use App\Http\Controllers\Admin\PackageController;
 use App\Http\Controllers\Admin\SettingsController;
 
 Route::get('/', function () {
-    return view('welcome');
-});
+    return view('client.home');
+})->name('home');
 
 /*
 |--------------------------------------------------------------------------
