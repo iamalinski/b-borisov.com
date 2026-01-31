@@ -124,7 +124,8 @@ section#home-hero {
         font-size: 180px;
         line-height: 0.71;
         letter-spacing: 3.5px;
-
+        position: relative;
+        z-index: 2;
         >span {
             font-family: "Felidae", sans-serif;
             font-weight: 400;
@@ -143,6 +144,57 @@ section#home-hero {
                 font-weight: 700;
                 text-transform: uppercase;
                 text-transform: uppercase;
+            }
+        }
+    }
+
+    ul {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+        width: 100%;
+        height: 575px; // колкото е средното (3) изображение
+        width: 1200px;
+        margin: 0 auto;
+        margin-top: -140px;
+
+        li {
+            position: absolute;
+
+            &:nth-child(1) {
+                left: -5px;
+                top: calc(50% + 62px);
+                transform: translateY(-50%);
+                z-index: 3;
+            }
+
+            &:nth-child(2) {
+                left: 181px;
+                top: 50%;
+                transform: translateY(-50%);
+                z-index: 2;
+            }
+
+            &:nth-child(3) {
+                top: 0;
+                left: 50%;
+                transform: translateX(-50%);
+                z-index: 1;
+            }
+
+            &:nth-child(4) {
+                z-index: 2;
+                right: 181px;
+                top: calc(50% + 100px);
+                transform: translateY(-50%);
+            }
+
+            &:nth-child(5) {
+                right: 22px;
+                top: calc(50% + 59px);
+                transform: translateY(-50%);
+                z-index: 3;
             }
         }
     }
