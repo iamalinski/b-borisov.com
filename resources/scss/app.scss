@@ -22,6 +22,12 @@
     src: url("../../public/fonts/Felidae/Felidae.ttf") format("truetype");
 }
 
+@font-face {
+    font-family: "Prosto One";
+    font-display: swap;
+    src: url("../../public/fonts/Prosto One/ProstoOne-Regular.ttf") format("truetype");
+}
+
 * {
     outline: none;
     padding: 0;
@@ -63,7 +69,7 @@ body {
 
     &::before {
         content: '';
-        width: 1500px;
+        width: 1850px;
         height: 2593px;
         background-image: url('../../public/images/home/bg.svg');
         background-size: contain;
@@ -126,6 +132,7 @@ section#home-hero {
         letter-spacing: 3.5px;
         position: relative;
         z-index: 2;
+
         >span {
             font-family: "Felidae", sans-serif;
             font-weight: 400;
@@ -196,6 +203,83 @@ section#home-hero {
                 transform: translateY(-50%);
                 z-index: 3;
             }
+        }
+    }
+}
+
+section#home-professional {
+    padding-top: 158px;
+
+    h2 {
+        font-family: "Century Gothic", sans-serif;
+        font-weight: 400;
+        font-size: 24.5px;
+        text-align: center;
+        margin-bottom: 33px;
+    }
+
+    >ul {
+        display: flex;
+        justify-content: center;
+        gap: 55px;
+        margin-bottom: 125px;
+
+        li {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            width: 110px;
+
+            img {
+                display: block;
+                height: 86px;
+                object-fit: contain;
+                margin-bottom: 3px;
+            }
+
+            span {
+                display: block;
+                text-align: center;
+                font-family: "Prosto One", sans-serif;
+                font-size: 23px;
+                line-height: 1;
+            }
+        }
+    }
+
+    p {
+        font-family: "Century Gothic", sans-serif;
+        font-size: 20px;
+        text-align: center;
+        max-width: 800px;
+        margin: 0 auto;
+        line-height: 1.6;
+        margin-bottom: 72px;
+    }
+
+    .author {
+        width: 383px;
+        height: 419px;
+        position: relative;
+        margin: 0 auto;
+
+        >img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            background-color: #fff;
+        }
+
+        ul {
+            position: absolute;
+            bottom: -65px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            align-items: center;
+            gap: 30px;
         }
     }
 }

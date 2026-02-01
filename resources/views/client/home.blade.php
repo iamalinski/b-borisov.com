@@ -35,6 +35,49 @@
             <li><img src="{{ asset('images/home/hero-5.png') }}" alt="Hero 5"></li>
         </ul>
     </section>
+    <section id="home-professional">
+            <h2>
+                професионално<br /> заснемане
+            </h2>
+            <ul>
+                <li>
+                    <img src="{{ asset('images/home/icons/professional-1.svg') }}" alt="Professional 1">
+                    <span>
+                        сватба
+                    </span>
+                </li>
+                <li>
+                    <img src="{{ asset('images/home/icons/professional-2.svg') }}" alt="Professional 2">
+                    <span>
+                        вашето<br /> събитие
+                    </span>
+                </li>
+                <li>
+                    <img src="{{ asset('images/home/icons/professional-3.svg') }}" alt="Professional 3">
+                    <span>
+                        кръщене
+                    </span>
+                </li>
+            </ul>
+            <p>
+                “Събитията имат свой ритъм, който не се вижда, а се усеща. Той крие в себе си жестовете, паузите,
+                погледите, несъвършените моменти, в които една ситуация разкрива истинския си характер.<br /> Затова
+                следвам
+                този ритъм внимателно и го превръщам в последователност от
+                образи, които говорят без обяснение.”
+            </p>
+            <div class="author">
+                <img src="" alt="">
+                <ul>
+                    <li>
+                        <img src="{{ asset('images/home/professional-author-1.svg') }}" alt="Professional Author 1">
+                    </li>
+                    <li>
+                        <img src="{{ asset('images/home/professional-author-2.svg') }}" alt="Professional Author 2">
+                    </li>
+                </ul>
+            </div>
+    </section>
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
@@ -106,54 +149,54 @@
         function initListAnimation() {
             // Set initial states - all items start faded out
             gsap.set(heroListItems, {
-            opacity: 0
+                opacity: 0
             });
             gsap.set([heroListItems[0], heroListItems[1]], {
-            x: 200
+                x: 200
             }); // Items before center
             gsap.set([heroListItems[3], heroListItems[4]], {
-            x: -200
+                x: -200
             }); // Items after center
 
             const tl = gsap.timeline({
-            scrollTrigger: {
-                trigger: '#home-hero ul',
-                start: 'top 50%',
-                toggleActions: 'play none none reverse',
-                onLeaveBack: () => {
-                gsap.to(heroListItems, {
-                    opacity: 0,
-                    duration: 0.3,
-                    ease: "power2.out",
-                    onComplete: () => {
-                    tl.progress(0);
+                scrollTrigger: {
+                    trigger: '#home-hero ul',
+                    start: 'top 50%',
+                    toggleActions: 'play none none reverse',
+                    onLeaveBack: () => {
+                        gsap.to(heroListItems, {
+                            opacity: 0,
+                            duration: 0.3,
+                            ease: "power2.out",
+                            onComplete: () => {
+                                tl.progress(0);
+                            }
+                        });
                     }
-                });
                 }
-            }
             });
 
             // First fade in the 3rd item (center)
             tl.to(heroListItems[2], {
-                opacity: 1,
-                duration: 0.6,
-                ease: "power2.out"
-            })
-            // Then animate items from center to their positions
-            .to([heroListItems[0], heroListItems[1]], {
-                opacity: 1,
-                x: 0,
-                duration: 0.8,
-                stagger: 0.15,
-                ease: "power2.out"
-            }, "-=0.2")
-            .to([heroListItems[3], heroListItems[4]], {
-                opacity: 1,
-                x: 0,
-                duration: 0.8,
-                stagger: 0.15,
-                ease: "power2.out"
-            }, "<");
+                    opacity: 1,
+                    duration: 0.6,
+                    ease: "power2.out"
+                })
+                // Then animate items from center to their positions
+                .to([heroListItems[0], heroListItems[1]], {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                }, "-=0.2")
+                .to([heroListItems[3], heroListItems[4]], {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.8,
+                    stagger: 0.15,
+                    ease: "power2.out"
+                }, "<");
         }
     </script>
 
