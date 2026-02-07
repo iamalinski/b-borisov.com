@@ -5,6 +5,12 @@
 }
 
 @font-face {
+    font-family: "Arsenica Trial DemiBold";
+    font-display: swap;
+    src: url("../../public/fonts/Arsenica Trial/ArsenicaTrial-Demibold.ttf") format("truetype");
+}
+
+@font-face {
     font-family: "Arsenica Trial Regular";
     font-display: swap;
     src: url("../../public/fonts/Arsenica Trial/ArsenicaTrial-Regular.ttf") format("truetype");
@@ -66,6 +72,8 @@ body {
     background-image: linear-gradient(to top, #fff, #F6F6F2);
     min-height: 5000px;
     position: relative;
+    overflow-x: hidden;
+    overflow-y: initial;
 
     &::before {
         content: '';
@@ -209,6 +217,7 @@ section#home-hero {
 
 section#home-professional {
     padding-top: 158px;
+    padding-bottom: 230px;
 
     h2 {
         font-family: "Century Gothic", sans-serif;
@@ -281,5 +290,114 @@ section#home-professional {
             align-items: center;
             gap: 30px;
         }
+    }
+}
+
+section#home-frame {
+    height: 800px;
+    background-image: url('../../public/images/home/frame-bg.jpg');
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-top: 27px;
+
+
+    h2 {
+        font-family: "Arsenica Trial DemiBold", sans-serif;
+        font-weight: 500;
+        font-size: 86px;
+        text-align: center;
+        color: #fff;
+        margin-bottom: 40px;
+    }
+
+    .picture {
+        width: 545px;
+        margin: 0 auto;
+        filter: drop-shadow(0px 4px 4px rgba(0, 0, 0, 0.1));
+
+        .top {
+            height: 450px;
+            border: 20px solid #fff;
+        }
+
+        .bottom {
+            background-color: #fff;
+            padding: 35px;
+            padding-top: 8px;
+            margin-top: -2px;
+            p {
+                text-align: center;
+                line-height: 2.2;
+                color: #51483F;
+                font-size: 16px;
+                font-family: "Century Gothic", sans-serif;
+            }
+        }
+    }
+}
+
+section#home-gallery {
+    padding-top: 135px;
+
+    .row {
+        max-width: 1504px;
+        width: 100%;
+        margin: 0 auto;
+        display: flex;
+        align-items: flex-start;
+        gap: 20px;
+
+        ul.col {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            flex: 1;
+
+            li {
+                width: 100%;
+
+                img {
+                    display: block;
+                    width: 100%;
+                }
+            }
+
+            &:nth-child(2) {
+                padding-top: 165px;
+            }
+
+            &:nth-child(3) {
+                padding-top: 65px;
+            }
+        }
+    }
+}
+
+section#home-services {
+    padding-top: 105px;
+    position: relative;
+    z-index: 2;
+
+    h2 {
+        font-family: "Arsenica Trial DemiBold", sans-serif;
+        text-align: center;
+        font-size: 86px;
+        color: #51483F;
+        line-height: 1;
+    }
+
+    &::before {
+        content: '';
+        width: 1998px;
+        height: 534px;
+        background-image: url('../../public/images/home/services-top-decor.png');
+        background-size: contain;
+        background-position: top center;
+        background-repeat: no-repeat;
+        position: absolute;
+        top: -25px;
+        left: 50%;
+        transform: translateX(-50%);
+        z-index: -1;
     }
 }

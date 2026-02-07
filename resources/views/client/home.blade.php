@@ -36,47 +36,99 @@
         </ul>
     </section>
     <section id="home-professional">
-            <h2>
-                професионално<br /> заснемане
-            </h2>
+        <h2>
+            професионално<br /> заснемане
+        </h2>
+        <ul>
+            <li>
+                <img src="{{ asset('images/home/icons/professional-1.svg') }}" alt="Professional 1">
+                <span>
+                    сватба
+                </span>
+            </li>
+            <li>
+                <img src="{{ asset('images/home/icons/professional-2.svg') }}" alt="Professional 2">
+                <span>
+                    вашето<br /> събитие
+                </span>
+            </li>
+            <li>
+                <img src="{{ asset('images/home/icons/professional-3.svg') }}" alt="Professional 3">
+                <span>
+                    кръщене
+                </span>
+            </li>
+        </ul>
+        <p>
+            “Събитията имат свой ритъм, който не се вижда, а се усеща. Той крие в себе си жестовете, паузите,
+            погледите, несъвършените моменти, в които една ситуация разкрива истинския си характер.<br /> Затова
+            следвам
+            този ритъм внимателно и го превръщам в последователност от
+            образи, които говорят без обяснение.”
+        </p>
+        <div class="author">
+            <img src="" alt="">
             <ul>
                 <li>
-                    <img src="{{ asset('images/home/icons/professional-1.svg') }}" alt="Professional 1">
-                    <span>
-                        сватба
-                    </span>
+                    <img src="{{ asset('images/home/professional-author-1.svg') }}" alt="Professional Author 1">
                 </li>
                 <li>
-                    <img src="{{ asset('images/home/icons/professional-2.svg') }}" alt="Professional 2">
-                    <span>
-                        вашето<br /> събитие
-                    </span>
-                </li>
-                <li>
-                    <img src="{{ asset('images/home/icons/professional-3.svg') }}" alt="Professional 3">
-                    <span>
-                        кръщене
-                    </span>
+                    <img src="{{ asset('images/home/professional-author-2.svg') }}" alt="Professional Author 2">
                 </li>
             </ul>
-            <p>
-                “Събитията имат свой ритъм, който не се вижда, а се усеща. Той крие в себе си жестовете, паузите,
-                погледите, несъвършените моменти, в които една ситуация разкрива истинския си характер.<br /> Затова
-                следвам
-                този ритъм внимателно и го превръщам в последователност от
-                образи, които говорят без обяснение.”
-            </p>
-            <div class="author">
-                <img src="" alt="">
-                <ul>
-                    <li>
-                        <img src="{{ asset('images/home/professional-author-1.svg') }}" alt="Professional Author 1">
-                    </li>
-                    <li>
-                        <img src="{{ asset('images/home/professional-author-2.svg') }}" alt="Professional Author 2">
-                    </li>
-                </ul>
+        </div>
+    </section>
+    <section id="home-frame">
+        <h2>
+            Истории в кадър
+        </h2>
+        <div class="picture">
+            <div class="top">
+
             </div>
+            <div class="bottom">
+                <p>
+                    Подбрани мигове, уловени естествено, които пресъздават атмосферата, емоцията и духа на събитието.
+                    Чрез внимание към детайла и неподправени моменти, всяка фотография разказва историята такава,
+                    каквато се случва – истинска, жива и непринудена.
+                </p>
+            </div>
+        </div>
+    </section>
+    <section id="home-gallery">
+        <div class="row">
+            <ul class="col">
+                <li><img src="{{ asset('images/home/gallery-1-1.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-2.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-3.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-4.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-5.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-6.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-1-7.jpg') }}" alt=""></li>
+            </ul>
+            <ul class="col">
+                <li><img src="{{ asset('images/home/gallery-2-1.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-2.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-3.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-4.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-5.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-6.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-2-7.jpg') }}" alt=""></li>
+            </ul>
+            <ul class="col">
+                <li><img src="{{ asset('images/home/gallery-3-6.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-3-5.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-3-4.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-3-3.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-3-2.jpg') }}" alt=""></li>
+                <li><img src="{{ asset('images/home/gallery-3-1.jpg') }}" alt=""></li>
+            </ul>
+        </div>
+    </section>
+    <section id="home-services">
+        <h2>
+            Услуги и<br /> пакетни предложения
+        </h2>
     </section>
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -198,6 +250,71 @@
                     ease: "power2.out"
                 }, "<");
         }
+
+        //
+
+        // Parallax animation for #home-frame .picture
+        const frameTop = document.querySelector('#home-frame .picture');
+
+        gsap.set(frameTop, {
+            opacity: 0,
+            y: -50
+        });
+
+        // Scrub-driven parallax for y only
+        gsap.to(frameTop, {
+            y: 100,
+            ease: "none",
+            scrollTrigger: {
+                trigger: '#home-frame',
+                start: 'top 90%',
+                end: 'bottom 20%',
+                scrub: 1.5,
+            }
+        });
+
+        // Scrub-driven fade in so it takes more scrolling to fully appear
+        gsap.to(frameTop, {
+            opacity: 1,
+            ease: "power1.inOut",
+            scrollTrigger: {
+                trigger: '#home-frame',
+                start: 'top 90%',
+                end: 'top 20%',
+                scrub: 1.5,
+                onLeaveBack: () => {
+                    gsap.to(frameTop, {
+                        opacity: 0,
+                        duration: 0.8,
+                        ease: "power1.inOut"
+                    });
+                }
+            }
+        });
+
+        //
+
+        // Gallery items fade-in one by one
+        const galleryItems = document.querySelectorAll('#home-gallery .row ul.col li');
+
+        galleryItems.forEach((item) => {
+            gsap.set(item, {
+                opacity: 0,
+                y: 40
+            });
+
+            gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: "power2.out",
+                scrollTrigger: {
+                    trigger: item,
+                    start: 'top 70%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        });
     </script>
 
 </body>
