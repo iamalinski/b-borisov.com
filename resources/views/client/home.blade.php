@@ -129,6 +129,97 @@
         <h2>
             Услуги и<br /> пакетни предложения
         </h2>
+        <ul class="services">
+            <li class="expanded base">
+                <div class="container">
+                    <b>
+                        Сватбен ден
+                    </b>
+                    <ul>
+                        <li>
+                            <div class="header">
+                                <strong>
+                                    Стандарт
+                                </strong>
+                            </div>
+                            <ul class="main">
+                                <li>
+                                    8 снимачни часа
+                                </li>
+                                <li>
+                                    Пълен документален разказ на деня
+                                </li>
+                                <li>
+                                    600+ кадъра
+                                </li>
+                                <li>
+                                    Обработка на всички кадри
+                                </li>
+                                <li>
+                                    Фотосесия на младоженците по време на сватбения ден
+                                </li>
+                                <li>
+                                    Сет от подбрани снимки до 14 дни след събитието
+                                </li>
+                                <li>
+                                    Дигитална галерия + електронен носител (флаш памет)
+                                </li>
+                                <li>
+                                    До 45 дни срок за получаване
+                                </li>
+                                <li>
+                                    Възможност за удължаване на снимачния ден
+                                </li>
+                            </ul>
+                            <div class="footer">
+                                <div class="price">
+                                    <span>
+                                        цена
+                                    </span>
+                                    <strong>
+                                        600 €
+                                    </strong>
+                                </div>
+                                <span class="link">
+                                    Виж допълнителни услуги
+                                </span>
+                            </div>
+                        </li>
+                        <li>
+
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <b>
+                        Свето Кръщение
+                    </b>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <b>
+                        Корпоративно събитие
+                    </b>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <b>
+                        Фотосесии
+                    </b>
+                </div>
+            </li>
+            <li>
+                <div class="container">
+                    <b>
+                        Вашият празник
+                    </b>
+                </div>
+            </li>
+        </ul>
     </section>
     <script>
         gsap.registerPlugin(ScrollTrigger);
@@ -315,6 +406,24 @@
                 }
             });
         });
+
+        //
+
+        document.querySelectorAll('#home-services ul.services li').forEach(function(item) {
+            item.addEventListener('click', function() {
+                if (this.classList.contains('expanded')) {
+                    return;
+                }
+
+                const expandedItem = document.querySelector('#home-services ul.services li.expanded');
+                if (expandedItem) {
+                    expandedItem.classList.remove('expanded');
+                }
+                this.classList.add('expanded');
+            });
+        });
+
+        //
     </script>
 
 </body>

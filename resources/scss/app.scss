@@ -325,10 +325,10 @@ section#home-frame {
             padding: 35px;
             padding-top: 8px;
             margin-top: -2px;
+
             p {
                 text-align: center;
                 line-height: 2.2;
-                color: #51483F;
                 font-size: 16px;
                 font-family: "Century Gothic", sans-serif;
             }
@@ -382,8 +382,176 @@ section#home-services {
         font-family: "Arsenica Trial DemiBold", sans-serif;
         text-align: center;
         font-size: 86px;
-        color: #51483F;
         line-height: 1;
+        margin-bottom: 85px;
+    }
+
+    ul.services {
+        width: 100%;
+        border-top: 1px solid #51483F;
+
+        >li {
+            width: 100%;
+            border-bottom: 1px solid #51483F;
+            padding: 0 15px;
+
+            .container {
+                max-width: 1250px;
+                width: 100%;
+                margin: 0 auto;
+                padding: 50px 0;
+
+                b {
+                    font-family: "Arsenica Trial DemiBold", sans-serif;
+                    font-size: 48px;
+                    font-weight: 600;
+                    display: block;
+                    position: relative;
+                    margin-bottom: 45px;
+
+                    &::after {
+                        content: '';
+                        width: 35px;
+                        height: 42px;
+                        background-image: url('../../public/images/home/icons/expand.svg');
+                        background-size: contain;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        position: absolute;
+                        right: 0;
+                        top: 50%;
+                        transform: translateY(-50%);
+                        transition: transform 0.3s ease;
+                    }
+                }
+            }
+
+            &.base {
+                .container {
+                    >ul {
+                        display: flex;
+                        gap: 55px;
+
+                        >li {
+                            background-image: radial-gradient(#6A5F53, #51483F);
+                            padding: 22px 18px;
+                            border-radius: 6px;
+                            flex: 1;
+                            overflow: hidden;
+                            position: relative;
+
+                            .header {
+                                margin-bottom: 15px;
+                                position: relative;
+                                z-index: 1;
+
+                                strong {
+                                    font-family: "Prosto One", sans-serif;
+                                    font-size: 29px;
+                                    color: #fff;
+                                    font-weight: 400;
+                                }
+                            }
+
+                            ul.main {
+                                gap: 15px 40px;
+                                display: flex;
+                                flex-direction: column;
+                                flex-wrap: wrap;
+                                height: 230px;
+                                position: relative;
+                                z-index: 1;
+
+                                li {
+                                    position: relative;
+                                    padding-left: 25px;
+                                    color: #fff;
+                                    font-size: 14px;
+                                    font-family: "Century Gothic", sans-serif;
+                                    line-height: 1.5;
+                                    width: calc(50% - 20px);
+
+                                    &::before {
+                                        content: '';
+                                        width: 12px;
+                                        height: 11px;
+                                        background-size: contain;
+                                        background-repeat: no-repeat;
+                                        background-position: center;
+                                        background-image: url('../../public/images/home/icons/check.svg');
+                                        position: absolute;
+                                        left: 0;
+                                        top: 6px;
+                                    }
+                                }
+                            }
+
+                            .footer {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: flex-end;
+                                margin-top: auto;
+                                padding-top: 10px;
+
+                                .price {
+                                    display: flex;
+                                    flex-direction: column;
+
+                                    span {
+                                        color: #fff;
+                                        font-family: "Prosto One", sans-serif;
+                                        font-size: 14px;
+                                    }
+
+                                    strong {
+                                        font-size: 32px;
+                                        color: #fff;
+                                        font-family: "Prosto One", sans-serif;
+                                        font-weight: 400;
+                                    }
+                                }
+
+                                span.link {
+                                    color: #DBC1A3;
+                                    font-size: 14px;
+                                    text-decoration: underline;
+                                    cursor: pointer;
+                                    font-family: "Century Gothic", sans-serif;
+                                }
+                            }
+
+                            &::after {
+                                content: '';
+                                width: 196px;
+                                height: 166px;
+                                background-image: url('../../public/images/home/services-sign.svg');
+                                background-size: contain;
+                                background-repeat: no-repeat;
+                                background-position: center;
+                                top: -30px;
+                                right: -30px;
+                                position: absolute;
+                                z-index: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.expanded {
+                .container {
+                    b {
+                        &::after {
+                            transform: translateY(-50%) rotate(180deg);
+                        }
+                    }
+                }
+            }
+
+            &:not(.expanded):hover {
+                cursor: pointer;
+            }
+        }
     }
 
     &::before {
