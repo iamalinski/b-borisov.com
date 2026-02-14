@@ -22,6 +22,11 @@
                 Photography
             </div>
         </a>
+        <div class="menu">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
     </header>
     <section id="home-hero">
         <h1>
@@ -437,6 +442,40 @@
             </li>
         </ul>
     </section>
+    <footer>
+        <div class="wrapper">
+            <img src="{{ asset('images/app/footer-brand.svg') }}" alt="Boris Borisov Photography">
+            <b>
+                ЗАПАЗИ
+            </b>
+            <p>
+                своя снимачен ден
+            </p>
+            <ul>
+                <li>
+                    <a href="tel:+359883375611" title="Обадете се">
+                        +359 883 375 611
+                    </a>
+                </li>
+                <li>
+                    <a href="mailto:borisov.photo@gmail.com" title="Изпратете имейл">
+                        borisov.photo@gmail.com
+                    </a>
+                </li>
+            </ul>
+            <h2>
+                БОРИС БОРИСОВ
+            </h2>
+            <div class="bottom">
+                <div class="left">
+                    <strong>© {{ date('Y') }} Борис Борисов</strong>. Всички права запазени.
+                </div>
+                <div class="right">
+
+                </div>
+            </div>
+        </div>
+    </footer>
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
