@@ -698,10 +698,128 @@
         // Services accordion (no animation, just click handler)
         document.querySelectorAll('#home-services ul.services li').forEach(function(item) {
             item.addEventListener('click', function() {
-                if (this.classList.contains('expanded')) return;
-                var expandedItem = document.querySelector('#home-services ul.services li.expanded');
-                if (expandedItem) expandedItem.classList.remove('expanded');
-                this.classList.add('expanded');
+            if (this.classList.contains('expanded')) return;
+
+            var expandedItem = document.querySelector('#home-services ul.services li.expanded');
+            var isBase = this.classList.contains('base');
+            var self = this;
+            var body = self.querySelector('.body');
+
+            if (expandedItem) {
+            var oldBody = expandedItem.querySelector('.body');
+            // Collapse old item
+            gsap.to(oldBody, {
+            height: 0,
+            opacity: 0,
+            duration: 0.4,
+            ease: "power2.inOut",
+            onComplete: function() {
+                expandedItem.classList.remove('expanded');
+                oldBody.style.height = '';
+                oldBody.style.opacity = '';
+                expandNewItem();
+            }
+            });
+            } else {
+            expandNewItem();
+            }
+
+            function expandNewItem() {
+            self.classList.add('expanded');
+
+            if (isBase) {
+            // BASE animation: elastic flip-in with staggered reveal
+            var cards = body.querySelectorAll(':scope > ul > li');
+            gsap.set(body, { height: 'auto', opacity: 1 });
+            var fullHeight = body.offsetHeight;
+            gsap.set(body, { height: 0, opacity: 0 });
+
+            var tl = gsap.timeline();
+
+            // Expand the body container
+            tl.to(body, {
+                height: fullHeight,
+                opacity: 1,
+                duration: 0.6,
+                ease: "power2.out",
+                onComplete: function() { body.style.height = 'auto'; }
+            });
+
+            if (cards.length) {
+                // Cards start invisible, scaled down, and flipped
+                gsap.set(cards, { opacity: 0, scale: 0.6, rotationX: 90, transformOrigin: 'center top', transformPerspective: 800 });
+
+                tl.to(cards, {
+                opacity: 1,
+                scale: 1,
+                rotationX: 0,
+                duration: 0.8,
+                stagger: 0.2,
+                ease: "elastic.out(1, 0.6)"
+                }, "-=0.3");
+
+                // Stagger inner list items with a typewriter-like slide
+                cards.forEach(function(card, cardIndex) {
+                var innerItems = card.querySelectorAll('ul.main li');
+                if (innerItems.length) {
+                gsap.fromTo(innerItems, {
+                opacity: 0,
+                y: 15,
+                scaleY: 0.8,
+                transformOrigin: 'top center'
+                }, {
+                opacity: 1,
+                y: 0,
+                scaleY: 1,
+                duration: 0.25,
+                stagger: 0.04,
+                ease: "power3.out",
+                delay: 0.5 + cardIndex * 0.15
+                });
+                }
+                var footer = card.querySelector('.footer');
+                if (footer) {
+                gsap.fromTo(footer, {
+                opacity: 0,
+                scale: 0.9
+                }, {
+                opacity: 1,
+                scale: 1,
+                duration: 0.5,
+                ease: "back.out(2)",
+                delay: 0.8 + cardIndex * 0.15
+                });
+                }
+                });
+            }
+            } else {
+            // NON-BASE animation: curtain reveal + content fade cascade
+            gsap.set(body, { height: 'auto', opacity: 1 });
+            var fullHeight = body.offsetHeight;
+            gsap.set(body, { height: 0, opacity: 1, overflow: 'hidden' });
+
+            var contentElements = body.querySelectorAll(':scope > p, :scope > ul > li');
+            gsap.set(contentElements, { opacity: 0, y: 30, filter: 'blur(4px)' });
+
+            var tl = gsap.timeline();
+
+            tl.to(body, {
+                height: fullHeight,
+                duration: 0.6,
+                ease: "power4.out",
+                onComplete: function() { body.style.height = 'auto'; body.style.overflow = ''; }
+            });
+
+            tl.to(contentElements, {
+                opacity: 1,
+                y: 0,
+                filter: 'blur(0px)',
+                duration: 0.4,
+                stagger: 0.08,
+                ease: "power2.out"
+            }, "-=0.25");
+            }
+            }
             });
         });
 
