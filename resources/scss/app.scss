@@ -87,6 +87,13 @@
     }
 }
 
+body,
+html {
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    scroll-behavior: smooth;
+}
+
 body {
     background-image: linear-gradient(to top, #fff, #F6F6F2);
     min-height: 5000px;
@@ -111,7 +118,7 @@ body {
 }
 
 header {
-    padding: 15px 40px;
+
     position: absolute;
     left: 0;
     top: 0;
@@ -120,33 +127,42 @@ header {
     align-items: center;
     justify-content: space-between;
 
-    a.brand {
+    &,
+    .menu-overlay .header {
+        padding: 15px 40px;
+        width: 100%;
         display: flex;
         align-items: center;
-        gap: 1px;
-        width: fit-content;
+        justify-content: space-between;
 
-        img {
-            display: block;
-        }
-
-        div {
-            font-family: "Century Gothic", sans-serif;
-            font-size: 13px;
+        a.brand {
             display: flex;
-            flex-direction: column;
-            align-items: flex-start;
-            text-transform: uppercase;
-            padding-top: 20px;
-            letter-spacing: 1.5px;
+            align-items: center;
+            gap: 1px;
+            width: fit-content;
 
-            span {
-                font-family: "Arsenica Trial Regular", sans-serif;
-                text-transform: inherit;
-                font-size: 21px;
-                line-height: 1;
+            img {
                 display: block;
-                letter-spacing: 0.4px;
+            }
+
+            div {
+                font-family: "Century Gothic", sans-serif;
+                font-size: 13px;
+                display: flex;
+                flex-direction: column;
+                align-items: flex-start;
+                text-transform: uppercase;
+                padding-top: 20px;
+                letter-spacing: 1.5px;
+
+                span {
+                    font-family: "Arsenica Trial Regular", sans-serif;
+                    text-transform: inherit;
+                    font-size: 21px;
+                    line-height: 1;
+                    display: block;
+                    letter-spacing: 0.4px;
+                }
             }
         }
     }
@@ -200,6 +216,227 @@ header {
                     transform: translateX(5px);
                 }
             }
+        }
+    }
+
+    .menu-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 10;
+        background-image: linear-gradient(to right, #F6F6F2, #fff);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-between;
+        overflow: auto;
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-20px);
+        transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s ease;
+
+        &.active {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+
+        .header {
+            .close-menu {
+                width: 65px;
+                height: 65px;
+                border-radius: 50%;
+                border: 2px solid #51483F;
+                background-color: transparent;
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                justify-content: center;
+                transition: background-color 0.3s ease, transform 0.3s ease;
+
+                span {
+                    display: block;
+                    height: 2px;
+                    background-color: #51483F;
+                    border-radius: 2px;
+                    width: 24px;
+                    position: absolute;
+                    transition: background-color 0.3s ease, transform 0.3s ease;
+
+                    &:nth-child(1) {
+                        transform: rotate(45deg);
+                    }
+
+                    &:nth-child(2) {
+                        transform: rotate(-45deg);
+                    }
+                }
+
+                &:hover {
+                    cursor: pointer;
+
+                    span {
+
+                        &:nth-child(1) {
+                            transform: rotate(135deg);
+                        }
+
+                        &:nth-child(2) {
+                            transform: rotate(45deg);
+                        }
+                    }
+                }
+            }
+        }
+
+        .main {
+            padding-bottom: 20px;
+
+            ul {
+                li {
+                    text-align: center;
+
+                    a {
+                        font-family: "Arsenica Trial DemiBold", sans-serif;
+                        font-size: 60px;
+                        transition: .1s;
+
+                        &:hover {
+                            color: #DBC2A3;
+                        }
+                    }
+
+                    &:not(:last-child) {
+                        margin-bottom: 20px;
+                    }
+                }
+            }
+        }
+
+        .footer {
+            padding-bottom: 15px;
+
+            svg {
+                display: block;
+                margin: 0 auto;
+                margin-bottom: -15px;
+                height: 70px;
+
+            }
+
+            b {
+                display: block;
+                text-align: center;
+                font-family: "Arsenica Trial DemiBold", sans-serif;
+                font-size: 35px;
+                font-weight: 600;
+            }
+
+            p {
+                font-family: "Felidae", sans-serif;
+                font-size: 35px;
+                text-align: center;
+                line-height: 1;
+                letter-spacing: 3px;
+                margin-bottom: 20px;
+            }
+
+            ul {
+                margin-bottom: 20px;
+
+                li {
+                    text-align: center;
+
+                    a {
+                        font-family: "Prosto One", sans-serif;
+                        font-size: 23px;
+                        transition: .1s;
+
+                        &:hover {
+                            color: #DBC2A3;
+                        }
+                    }
+
+                    &:not(:last-child) {
+                        margin-bottom: 3px;
+                    }
+                }
+            }
+
+            .bottom {
+                display: flex;
+                align-items: center;
+                // justify-content: space-between;
+                justify-content: center;
+
+                .left {
+                    font-family: "Inter Light", sans-serif;
+                    font-size: 10px;
+
+                    strong {
+                        font-family: "Inter Medium", sans-serif;
+                        font-weight: 500;
+                        font-size: inherit;
+                    }
+                }
+            }
+        }
+
+    }
+}
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(to right, #F6F6F2, #fff);
+    z-index: 99999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    div.brand {
+        display: flex;
+        align-items: center;
+        gap: 1px;
+        width: fit-content;
+        animation: fadeIn 1s ease forwards;
+
+        img {
+            display: block;
+        }
+
+        div {
+            font-family: "Century Gothic", sans-serif;
+            font-size: 13px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-start;
+            text-transform: uppercase;
+            padding-top: 20px;
+            letter-spacing: 1.5px;
+
+            span {
+                font-family: "Arsenica Trial Regular", sans-serif;
+                text-transform: inherit;
+                font-size: 21px;
+                line-height: 1;
+                display: block;
+                letter-spacing: 0.4px;
+            }
+        }
+    }
+
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+        }
+        100% {
+            opacity: 1;
         }
     }
 }
@@ -293,12 +530,17 @@ section#home-professional {
     padding-top: 158px;
     padding-bottom: 230px;
 
-    h2 {
+    h2,
+    h2 span {
         font-family: "Century Gothic", sans-serif;
         font-weight: 400;
         font-size: 24.5px;
         text-align: center;
+    }
+
+    h2 {
         margin-bottom: 33px;
+
     }
 
     >ul {
@@ -375,13 +617,18 @@ section#home-frame {
     padding-top: 27px;
 
 
-    h2 {
+    h2,
+    h2 span {
         font-family: "Arsenica Trial DemiBold", sans-serif;
         font-weight: 500;
         font-size: 86px;
         text-align: center;
         color: #fff;
+    }
+
+    h2 {
         margin-bottom: 40px;
+
     }
 
     .picture {
@@ -452,12 +699,17 @@ section#home-services {
     position: relative;
     z-index: 2;
 
-    h2 {
+    h2,
+    h2 span {
         font-family: "Arsenica Trial DemiBold", sans-serif;
         text-align: center;
         font-size: 86px;
         line-height: 1;
+    }
+
+    h2 {
         margin-bottom: 85px;
+
     }
 
     ul.services {
@@ -698,7 +950,8 @@ footer {
     .wrapper {
         padding: 0 50px;
 
-        img {
+        img,
+        svg {
             display: block;
             margin: 0 auto;
             margin-bottom: -30px;
@@ -739,7 +992,8 @@ footer {
             }
         }
 
-        h2 {
+        h2,
+        h2 span {
             font-size: 13vw;
             white-space: nowrap;
             width: 100%;
