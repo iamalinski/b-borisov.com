@@ -251,6 +251,9 @@
                                         <li>
                                             Възможност за удължаване на снимачния ден
                                         </li>
+                                        <li>
+                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                        </li>
                                     </ul>
                                     <div class="footer">
                                         <div class="price">
@@ -303,6 +306,9 @@
                                         <li>
                                             Възможност за удължаване на снимачния ден
                                         </li>
+                                        <li>
+                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                        </li>
                                     </ul>
                                     <div class="footer">
                                         <div class="price">
@@ -350,6 +356,9 @@
                                         </li>
                                         <li>
                                             До 14 дни срок за получаване
+                                        </li>
+                                        <li>
+                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
                                         </li>
                                     </ul>
                                     <div class="footer">
@@ -400,6 +409,9 @@
                                         <li>
                                             Възможност за удължаване на снимачния ден
                                         </li>
+                                        <li>
+                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                        </li>
                                     </ul>
                                     <div class="footer">
                                         <div class="price">
@@ -444,7 +456,13 @@
                                 <li>
                                     Сет от подбрани снимки до няколко часа след събитието
                                 </li>
+                                <li>
+                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                </li>
                             </ul>
+                            <span class="link">
+                                Виж допълнителни услуги
+                            </span>
                         </div>
                     </div>
                 </li>
@@ -476,7 +494,13 @@
                                 <li>
                                     До 14 дни срок за получаване
                                 </li>
+                                <li>
+                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                </li>
                             </ul>
+                            <span class="link">
+                                Виж допълнителни услуги
+                            </span>
                         </div>
                     </div>
                 </li>
@@ -511,7 +535,13 @@
                                 <li>
                                     До 14 дни срок за получаване
                                 </li>
+                                <li>
+                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
+                                </li>
                             </ul>
+                            <span class="link">
+                                Виж допълнителни услуги
+                            </span>
                         </div>
                     </div>
                 </li>
@@ -555,6 +585,20 @@
             </div>
         </div>
     </footer>
+    <div class="services-popup-overlay" id="services-popup-overlay">
+        <div class="services-popup">
+            <div class="services-popup-header">
+                <h3 id="services-popup-title">Допълнителни услуги</h3>
+                <div class="services-popup-close">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="services-popup-body">
+                <ul id="services-popup-list"></ul>
+            </div>
+        </div>
+    </div>
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
@@ -618,7 +662,9 @@
 
         var heroUl = document.querySelector('#home-hero ul');
         var heroListItems = heroUl.querySelectorAll('li');
-        gsap.set(heroListItems, { opacity: 0 });
+        gsap.set(heroListItems, {
+            opacity: 0
+        });
 
         var h1 = document.querySelector('#home-hero h1');
         var h1Chars = splitTextToChars(h1);
@@ -627,15 +673,24 @@
         document.querySelectorAll('main section h2').forEach(function(h2) {
             var section = h2.closest('section');
             var chars = splitTextToChars(h2);
-            h2Data.push({ section: section, chars: chars });
+            h2Data.push({
+                section: section,
+                chars: chars
+            });
         });
 
         var frameTop = document.querySelector('#home-frame .picture');
-        gsap.set(frameTop, { opacity: 0, y: -50 });
+        gsap.set(frameTop, {
+            opacity: 0,
+            y: -50
+        });
 
         var galleryItems = document.querySelectorAll('#home-gallery .row ul.col li');
         galleryItems.forEach(function(item) {
-            gsap.set(item, { opacity: 0, y: 40 });
+            gsap.set(item, {
+                opacity: 0,
+                y: 40
+            });
         });
 
         var footerSvgPath = document.querySelector('footer svg path');
@@ -665,7 +720,9 @@
             menuSvgPath.style.strokeDasharray = menuPathLength;
             menuSvgPath.style.strokeDashoffset = menuPathLength;
 
-            menuSvgTl = gsap.timeline({ paused: true });
+            menuSvgTl = gsap.timeline({
+                paused: true
+            });
             menuSvgTl.to(menuSvgPath, {
                 strokeDashoffset: 0,
                 fill: '#DBC2A3',
@@ -675,151 +732,298 @@
             });
         }
 
+        var menuItems = document.querySelectorAll('header .menu-overlay .main ul li');
+
         menuBtn.addEventListener('click', function() {
             menuOverlay.classList.add('active');
             document.body.style.overflow = 'hidden';
-            if (menuSvgTl) { menuSvgTl.timeScale(1); menuSvgTl.restart(); }
+            if (menuSvgTl) {
+                menuSvgTl.timeScale(1);
+                menuSvgTl.restart();
+            }
+
+            gsap.set(menuItems, {
+                opacity: 0,
+                y: 30
+            });
+            gsap.to(menuItems, {
+                opacity: 1,
+                y: 0,
+                duration: 0.5,
+                stagger: 0.12,
+                ease: "power3.out",
+                delay: 0.15
+            });
         });
 
         closeMenuBtn.addEventListener('click', function() {
-            menuOverlay.classList.remove('active');
-            document.body.style.overflow = '';
-            if (menuSvgTl) { menuSvgTl.timeScale(4); menuSvgTl.reverse(); }
+            gsap.to(menuItems, {
+                opacity: 0,
+                y: -15,
+                duration: 0.25,
+                stagger: 0.05,
+                ease: "power2.in",
+                onComplete: function() {
+                    menuOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+            if (menuSvgTl) {
+                menuSvgTl.timeScale(4);
+                menuSvgTl.reverse();
+            }
         });
 
         menuLinks.forEach(function(link) {
             link.addEventListener('click', function() {
-                menuOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-                if (menuSvgTl) { menuSvgTl.timeScale(4); menuSvgTl.reverse(); }
+                gsap.to(menuItems, {
+                    opacity: 0,
+                    y: -15,
+                    duration: 0.25,
+                    stagger: 0.05,
+                    ease: "power2.in",
+                    onComplete: function() {
+                        menuOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+                if (menuSvgTl) {
+                    menuSvgTl.timeScale(4);
+                    menuSvgTl.reverse();
+                }
             });
         });
 
         // Services accordion (no animation, just click handler)
         document.querySelectorAll('#home-services ul.services li').forEach(function(item) {
             item.addEventListener('click', function() {
-            if (this.classList.contains('expanded')) return;
+                if (this.classList.contains('expanded')) return;
 
-            var expandedItem = document.querySelector('#home-services ul.services li.expanded');
-            var isBase = this.classList.contains('base');
-            var self = this;
-            var body = self.querySelector('.body');
+                var expandedItem = document.querySelector('#home-services ul.services li.expanded');
+                var isBase = this.classList.contains('base');
+                var self = this;
+                var body = self.querySelector('.body');
 
-            if (expandedItem) {
-            var oldBody = expandedItem.querySelector('.body');
-            // Collapse old item
-            gsap.to(oldBody, {
-            height: 0,
-            opacity: 0,
-            duration: 0.4,
-            ease: "power2.inOut",
-            onComplete: function() {
-                expandedItem.classList.remove('expanded');
-                oldBody.style.height = '';
-                oldBody.style.opacity = '';
-                expandNewItem();
-            }
+                if (expandedItem) {
+                    var oldBody = expandedItem.querySelector('.body');
+                    // Collapse old item
+                    gsap.to(oldBody, {
+                        height: 0,
+                        opacity: 0,
+                        duration: 0.4,
+                        ease: "power2.inOut",
+                        onComplete: function() {
+                            expandedItem.classList.remove('expanded');
+                            oldBody.style.height = '';
+                            oldBody.style.opacity = '';
+                            expandNewItem();
+                        }
+                    });
+                } else {
+                    expandNewItem();
+                }
+
+                function expandNewItem() {
+                    self.classList.add('expanded');
+
+                    if (isBase) {
+                        // BASE animation: elastic flip-in with staggered reveal
+                        var cards = body.querySelectorAll(':scope > ul > li');
+                        gsap.set(body, {
+                            height: 'auto',
+                            opacity: 1
+                        });
+                        var fullHeight = body.offsetHeight;
+                        gsap.set(body, {
+                            height: 0,
+                            opacity: 0
+                        });
+
+                        var tl = gsap.timeline();
+
+                        // Expand the body container
+                        tl.to(body, {
+                            height: fullHeight,
+                            opacity: 1,
+                            duration: 0.6,
+                            ease: "power2.out",
+                            onComplete: function() {
+                                body.style.height = 'auto';
+                            }
+                        });
+
+                        if (cards.length) {
+                            gsap.set(cards, {
+                                opacity: 0,
+                                y: 30
+                            });
+
+                            tl.to(cards, {
+                                opacity: 1,
+                                y: 0,
+                                duration: 0.7,
+                                stagger: 0.15,
+                                ease: "power2.out"
+                            }, "-=0.3");
+
+                            cards.forEach(function(card, cardIndex) {
+                                var innerItems = card.querySelectorAll('ul.main li');
+                                if (innerItems.length) {
+                                    gsap.fromTo(innerItems, {
+                                        opacity: 0,
+                                        y: 12
+                                    }, {
+                                        opacity: 1,
+                                        y: 0,
+                                        duration: 0.4,
+                                        stagger: 0.05,
+                                        ease: "power2.out",
+                                        delay: 0.4 + cardIndex * 0.2
+                                    });
+                                }
+                                var footer = card.querySelector('.footer');
+                                if (footer) {
+                                    gsap.fromTo(footer, {
+                                        opacity: 0,
+                                        y: 10
+                                    }, {
+                                        opacity: 1,
+                                        y: 0,
+                                        duration: 0.5,
+                                        ease: "power2.out",
+                                        delay: 0.7 + cardIndex * 0.2
+                                    });
+                                }
+                            });
+                        }
+                    } else {
+                        // NON-BASE animation: curtain reveal + content fade cascade
+                        gsap.set(body, {
+                            height: 'auto',
+                            opacity: 1
+                        });
+                        var fullHeight = body.offsetHeight;
+                        gsap.set(body, {
+                            height: 0,
+                            opacity: 1,
+                            overflow: 'hidden'
+                        });
+
+                        var contentElements = body.querySelectorAll(':scope > p, :scope > ul > li, :scope > span.link');
+                        gsap.set(contentElements, {
+                            opacity: 0,
+                            y: 30,
+                            filter: 'blur(4px)'
+                        });
+
+                        var tl = gsap.timeline();
+
+                        tl.to(body, {
+                            height: fullHeight,
+                            duration: 0.6,
+                            ease: "power4.out",
+                            onComplete: function() {
+                                body.style.height = 'auto';
+                                body.style.overflow = '';
+                            }
+                        });
+
+                        tl.to(contentElements, {
+                            opacity: 1,
+                            y: 0,
+                            filter: 'blur(0px)',
+                            duration: 0.4,
+                            stagger: 0.08,
+                            ease: "power2.out"
+                        }, "-=0.25");
+                    }
+                }
             });
-            } else {
-            expandNewItem();
-            }
+        });
 
-            function expandNewItem() {
-            self.classList.add('expanded');
+        // Services popup
+        var popupOverlay = document.getElementById('services-popup-overlay');
+        var popupTitle = document.getElementById('services-popup-title');
+        var popupList = document.getElementById('services-popup-list');
+        var popupClose = document.querySelector('.services-popup-close');
+        var popup = document.querySelector('.services-popup');
 
-            if (isBase) {
-            // BASE animation: elastic flip-in with staggered reveal
-            var cards = body.querySelectorAll(':scope > ul > li');
-            gsap.set(body, { height: 'auto', opacity: 1 });
-            var fullHeight = body.offsetHeight;
-            gsap.set(body, { height: 0, opacity: 0 });
+        var weddingExtras = [
+            'Сватбена фотосесия в различен ден — <strong>150€</strong> <small>(транспортът на повече от 100 км от Велико Търново се поема от клиента)</small>',
+            'Овъртайм — <strong>80€/час</strong>',
+            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
+            'Изготвяне на индивидуален пакет'
+        ];
 
-            var tl = gsap.timeline();
+        var otherExtras = [
+            'Овъртайм — <strong>80€/час</strong>',
+            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
+            'Луксозен Фотоалбум с 30 избрани кадри във формат 15х20 на премиум хартия — <strong>70€</strong> <small>(кръщене)</small>',
+            'Изготвяне на индивидуален пакет'
+        ];
 
-            // Expand the body container
-            tl.to(body, {
-                height: fullHeight,
-                opacity: 1,
-                duration: 0.6,
-                ease: "power2.out",
-                onComplete: function() { body.style.height = 'auto'; }
-            });
+        function openServicesPopup(isWedding) {
+            var items = isWedding ? weddingExtras : otherExtras;
+            popupTitle.textContent = 'Допълнителни услуги';
+            popupList.innerHTML = items.map(function(item) {
+                return '<li>' + item + '</li>';
+            }).join('');
 
-            if (cards.length) {
-                // Cards start invisible, scaled down, and flipped
-                gsap.set(cards, { opacity: 0, scale: 0.6, rotationX: 90, transformOrigin: 'center top', transformPerspective: 800 });
+            popupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
 
-                tl.to(cards, {
-                opacity: 1,
-                scale: 1,
-                rotationX: 0,
-                duration: 0.8,
-                stagger: 0.2,
-                ease: "elastic.out(1, 0.6)"
-                }, "-=0.3");
+            var listItems = popupList.querySelectorAll('li');
+            gsap.set(popup, { opacity: 0, y: 40 });
+            gsap.set(listItems, { opacity: 0, y: 20 });
 
-                // Stagger inner list items with a typewriter-like slide
-                cards.forEach(function(card, cardIndex) {
-                var innerItems = card.querySelectorAll('ul.main li');
-                if (innerItems.length) {
-                gsap.fromTo(innerItems, {
-                opacity: 0,
-                y: 15,
-                scaleY: 0.8,
-                transformOrigin: 'top center'
-                }, {
+            gsap.to(popup, {
                 opacity: 1,
                 y: 0,
-                scaleY: 1,
-                duration: 0.25,
-                stagger: 0.04,
-                ease: "power3.out",
-                delay: 0.5 + cardIndex * 0.15
-                });
-                }
-                var footer = card.querySelector('.footer');
-                if (footer) {
-                gsap.fromTo(footer, {
-                opacity: 0,
-                scale: 0.9
-                }, {
-                opacity: 1,
-                scale: 1,
                 duration: 0.5,
-                ease: "back.out(2)",
-                delay: 0.8 + cardIndex * 0.15
-                });
-                }
-                });
-            }
-            } else {
-            // NON-BASE animation: curtain reveal + content fade cascade
-            gsap.set(body, { height: 'auto', opacity: 1 });
-            var fullHeight = body.offsetHeight;
-            gsap.set(body, { height: 0, opacity: 1, overflow: 'hidden' });
-
-            var contentElements = body.querySelectorAll(':scope > p, :scope > ul > li');
-            gsap.set(contentElements, { opacity: 0, y: 30, filter: 'blur(4px)' });
-
-            var tl = gsap.timeline();
-
-            tl.to(body, {
-                height: fullHeight,
-                duration: 0.6,
-                ease: "power4.out",
-                onComplete: function() { body.style.height = 'auto'; body.style.overflow = ''; }
+                ease: "power2.out"
             });
 
-            tl.to(contentElements, {
+            gsap.to(listItems, {
                 opacity: 1,
                 y: 0,
-                filter: 'blur(0px)',
                 duration: 0.4,
                 stagger: 0.08,
-                ease: "power2.out"
-            }, "-=0.25");
+                ease: "power2.out",
+                delay: 0.25
+            });
+        }
+
+        function closeServicesPopup() {
+            gsap.to(popup, {
+                opacity: 0,
+                y: 30,
+                duration: 0.3,
+                ease: "power2.in",
+                onComplete: function() {
+                    popupOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        }
+
+        popupClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeServicesPopup();
+        });
+
+        popupOverlay.addEventListener('click', function(e) {
+            if (e.target === popupOverlay) {
+                closeServicesPopup();
             }
-            }
+        });
+
+        document.querySelectorAll('#home-services ul.services > li span.link').forEach(function(link) {
+            link.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var serviceItem = this.closest('#home-services ul.services > li');
+                var isWedding = serviceItem.querySelector('b') &&
+                    serviceItem.querySelector('b').textContent.trim() === 'Сватбен ден';
+                openServicesPopup(isWedding);
             });
         });
 
@@ -834,8 +1038,15 @@
                 ScrollTrigger.create({
                     trigger: data.section,
                     start: 'top 60%',
-                    onEnter: function() { animateChars(data.chars, 1); },
-                    onLeaveBack: function() { gsap.set(data.chars, { opacity: 0, y: 20 }); }
+                    onEnter: function() {
+                        animateChars(data.chars, 1);
+                    },
+                    onLeaveBack: function() {
+                        gsap.set(data.chars, {
+                            opacity: 0,
+                            y: 20
+                        });
+                    }
                 });
             });
 
@@ -860,7 +1071,11 @@
                     end: 'top 20%',
                     scrub: 1.5,
                     onLeaveBack: function() {
-                        gsap.to(frameTop, { opacity: 0, duration: 0.8, ease: "power1.inOut" });
+                        gsap.to(frameTop, {
+                            opacity: 0,
+                            duration: 0.8,
+                            ease: "power1.inOut"
+                        });
                     }
                 }
             });
@@ -901,16 +1116,28 @@
                 ScrollTrigger.create({
                     trigger: 'footer svg',
                     start: 'top 80%',
-                    onLeaveBack: function() { svgTl.timeScale(4); svgTl.reverse(); },
-                    onEnter: function() { svgTl.timeScale(1); svgTl.play(); }
+                    onLeaveBack: function() {
+                        svgTl.timeScale(4);
+                        svgTl.reverse();
+                    },
+                    onEnter: function() {
+                        svgTl.timeScale(1);
+                        svgTl.play();
+                    }
                 });
             }
         }
 
         function initListAnimation() {
-            gsap.set(heroListItems, { opacity: 0 });
-            gsap.set([heroListItems[0], heroListItems[1]], { x: 200 });
-            gsap.set([heroListItems[3], heroListItems[4]], { x: -200 });
+            gsap.set(heroListItems, {
+                opacity: 0
+            });
+            gsap.set([heroListItems[0], heroListItems[1]], {
+                x: 200
+            });
+            gsap.set([heroListItems[3], heroListItems[4]], {
+                x: -200
+            });
 
             var tl = gsap.timeline({
                 scrollTrigger: {
@@ -922,7 +1149,9 @@
                             opacity: 0,
                             duration: 0.3,
                             ease: "power2.out",
-                            onComplete: function() { tl.progress(0); }
+                            onComplete: function() {
+                                tl.progress(0);
+                            }
                         });
                     }
                 }
