@@ -14,7 +14,7 @@
 <body>
     <div class="loading-overlay" id="loading-overlay">
         <div href="{{ route('home') }}" class="brand">
-            <img src="{{ asset('images/app/header-brand.svg') }}" alt="Boris Borisov Photography">
+            <img src="{{ asset('images/app/loading-brand.svg') }}" alt="Boris Borisov Photography">
             <div>
                 <span>
                     Boris Borisov
@@ -32,6 +32,9 @@
                 </span>
                 Photography
             </div>
+        </a>
+        <a href="tel:+359888123456" class="call">
+            <img src="{{ asset('images/app/phone.svg') }}" alt="Call">
         </a>
         <div class="menu">
             <span></span>
@@ -150,7 +153,7 @@
                 образи, които говорят без обяснение.”
             </p>
             <div class="author">
-                <img src="" alt="">
+                <img src="{{ asset('images/home/author.jpg') }}" alt="Author">
                 <ul>
                     <li>
                         <img src="{{ asset('images/home/professional-author-1.svg') }}" alt="Professional Author 1">
@@ -909,7 +912,8 @@
                             overflow: 'hidden'
                         });
 
-                        var contentElements = body.querySelectorAll(':scope > p, :scope > ul > li, :scope > span.link');
+                        var contentElements = body.querySelectorAll(
+                            ':scope > p, :scope > ul > li, :scope > span.link');
                         gsap.set(contentElements, {
                             opacity: 0,
                             y: 30,
@@ -973,8 +977,14 @@
             document.body.style.overflow = 'hidden';
 
             var listItems = popupList.querySelectorAll('li');
-            gsap.set(popup, { opacity: 0, y: 40 });
-            gsap.set(listItems, { opacity: 0, y: 20 });
+            gsap.set(popup, {
+                opacity: 0,
+                y: 40
+            });
+            gsap.set(listItems, {
+                opacity: 0,
+                y: 20
+            });
 
             gsap.to(popup, {
                 opacity: 1,
@@ -1190,7 +1200,6 @@
 
             setTimeout(function() {
                 gsap.to(loadingOverlay, {
-                    // y: '-100%',
                     opacity: 0,
                     duration: 0.8,
                     ease: 'power3.inOut',
