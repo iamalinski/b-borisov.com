@@ -2,6 +2,18 @@
 <html lang="en">
 
 <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJL1XR38MV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+
+        function gtag() {
+            dataLayer.push(arguments);
+        }
+        gtag('js', new Date());
+        gtag('config', 'G-DJL1XR38MV');
+    </script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Boris Borisov Photography</title>
@@ -30,6 +42,84 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('images/app/favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
+
+    @php
+        $jsonLd = [
+            '@context' => 'https://schema.org',
+            '@graph' => [
+                [
+                    '@type' => 'Organization',
+                    '@id' => 'https://b-borisov.com',
+                    'name' => 'Борис Борисов Photography',
+                    'url' => 'https://b-borisov.com',
+                    'logo' => 'https://b-borisov.com/images/app/header-brand.svg',
+                    'description' => 'Професионален фотограф за сватби, кръщенета, корпоративни събития и фотосесии.',
+                    'email' => 'photography.borisov@gmail.com',
+                    'telephone' => '+359883375611'
+                ],
+                [
+                    '@type' => 'WebSite',
+                    '@id' => 'https://b-borisov.com/#website',
+                    'url' => 'https://b-borisov.com',
+                    'name' => 'Борис Борисов Photography',
+                    'publisher' => [ '@id' => 'https://b-borisov.com' ]
+                ],
+                [
+                    '@type' => 'Service',
+                    '@id' => 'https://b-borisov.com',
+                    'serviceType' => 'Wedding Photography',
+                    'name' => 'Сватбен ден',
+                    'description' => 'Пълно заснемане на сватбения ден, обработка на всички кадри, фотосесия на младоженците, дигитална галерия и електронен носител.',
+                    'provider' => [ '@id' => 'https://b-borisov.com' ],
+                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
+                    'offers' => [ [ '@type' => 'Offer', 'price' => '500', 'priceCurrency' => 'EUR' ] ]
+                ],
+                [
+                    '@type' => 'Service',
+                    '@id' => 'https://b-borisov.com',
+                    'serviceType' => 'Baptism Photography',
+                    'name' => 'Свето Кръщение',
+                    'description' => 'Заснемане на ритуала и празненството, обработка на всички кадри, дигитална галерия и електронен носител.',
+                    'provider' => [ '@id' => 'https://b-borisov.com' ],
+                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
+                    'offers' => [ [ '@type' => 'Offer', 'price' => '200', 'priceCurrency' => 'EUR' ] ]
+                ],
+                [
+                    '@type' => 'Service',
+                    '@id' => 'https://b-borisov.com',
+                    'serviceType' => 'Corporate Event Photography',
+                    'name' => 'Корпоративно събитие',
+                    'description' => 'Заснемане на корпоративни събития, обработка на всички кадри, бърза доставка на снимки.',
+                    'provider' => [ '@id' => 'https://b-borisov.com' ],
+                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
+                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
+                ],
+                [
+                    '@type' => 'Service',
+                    '@id' => 'https://b-borisov.com',
+                    'serviceType' => 'Photoshoot',
+                    'name' => 'Фотосесии',
+                    'description' => 'Професионални фотосесии за различни поводи, обработка на всички кадри, дигитална галерия.',
+                    'provider' => [ '@id' => 'https://b-borisov.com' ],
+                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
+                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
+                ],
+                [
+                    '@type' => 'Service',
+                    '@id' => 'https://b-borisov.com',
+                    'serviceType' => 'Celebration Photography',
+                    'name' => 'Вашият празник',
+                    'description' => 'Заснемане на балове, рождени дни и други празници, обработка на всички кадри, дигитална галерия.',
+                    'provider' => [ '@id' => 'https://b-borisov.com' ],
+                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
+                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
+                ]
+            ]
+        ];
+    @endphp
+    <script type="application/ld+json">
+        {!! json_encode($jsonLd, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT) !!}
+    </script>
 </head>
 
 <body>
@@ -54,7 +144,7 @@
                 Photography
             </div>
         </a>
-        <a href="tel:+359888123456" class="call">
+        <a href="tel:+359883375611" class="call">
             <img src="{{ asset('images/app/phone.svg') }}" alt="Call">
         </a>
         <div class="menu">
@@ -117,8 +207,8 @@
                         </a>
                     </li>
                     <li>
-                        <a href="mailto:borisov.photo@gmail.com" title="Изпратете имейл">
-                            borisov.photo@gmail.com
+                        <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">
+                            photography.borisov@gmail.com
                         </a>
                     </li>
                 </ul>
@@ -275,9 +365,6 @@
                                         <li>
                                             Възможност за удължаване на снимачния ден
                                         </li>
-                                        <li>
-                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                        </li>
                                     </ul>
                                     <div class="footer">
                                         <div class="price">
@@ -329,9 +416,6 @@
                                         </li>
                                         <li>
                                             Възможност за удължаване на снимачния ден
-                                        </li>
-                                        <li>
-                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
                                         </li>
                                     </ul>
                                     <div class="footer">
@@ -461,9 +545,6 @@
                             Корпоративно събитие
                         </b>
                         <div class="body">
-                            <p>
-                                Lorem ipsum dolor sit, amet
-                            </p>
                             <ul>
                                 <li>
                                     Ангажираност по Ваш избор (минимум 2 часа) 80€/час
@@ -496,9 +577,6 @@
                             Фотосесии
                         </b>
                         <div class="body">
-                            <p>
-                                lorem ipsum dolor sit, amet
-                            </p>
                             <ul>
                                 <li>
                                     Ангажираност по Ваш избор (минимум 2 часа) 80€/час
@@ -535,7 +613,7 @@
                         </b>
                         <div class="body">
                             <p>
-                                Походящ за балове, рождени дни и др.
+                                Подходящ за балове, рождени дни и др.
                             </p>
                             <ul>
                                 <li>
@@ -593,8 +671,8 @@
                     </a>
                 </li>
                 <li>
-                    <a href="mailto:borisov.photo@gmail.com" title="Изпратете имейл">
-                        borisov.photo@gmail.com
+                    <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">
+                        photography.borisov@gmail.com
                     </a>
                 </li>
             </ul>
@@ -974,7 +1052,7 @@
         var popup = document.querySelector('.services-popup');
 
         var weddingExtras = [
-            'Сватбена фотосесия в различен ден — <strong>150€</strong> <small>(транспортът на повече от 100 км от Велико Търново се поема от клиента)</small>',
+            'Сватбена фотосесия в различен ден — <strong>150€</strong>',
             'Овъртайм — <strong>80€/час</strong>',
             'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
             'Изготвяне на индивидуален пакет'
@@ -983,12 +1061,18 @@
         var otherExtras = [
             'Овъртайм — <strong>80€/час</strong>',
             'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
-            'Луксозен Фотоалбум с 30 избрани кадри във формат 15х20 на премиум хартия — <strong>70€</strong> <small>(кръщене)</small>',
             'Изготвяне на индивидуален пакет'
         ];
 
-        function openServicesPopup(isWedding) {
-            var items = isWedding ? weddingExtras : otherExtras;
+        var baptismExtras = [
+            'Овъртайм — <strong>80€/час</strong>',
+            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
+            'Луксозен Фотоалбум с 30 избрани кадри във формат 15х20 на премиум хартия — <strong>70€</strong>',
+            'Изготвяне на индивидуален пакет'
+        ];
+
+        function openServicesPopup(isWedding, isBaptism) {
+            var items = isWedding ? weddingExtras : isBaptism ? baptismExtras : otherExtras;
             popupTitle.textContent = 'Допълнителни услуги';
             popupList.innerHTML = items.map(function(item) {
                 return '<li>' + item + '</li>';
@@ -1054,7 +1138,9 @@
                 var serviceItem = this.closest('#home-services ul.services > li');
                 var isWedding = serviceItem.querySelector('b') &&
                     serviceItem.querySelector('b').textContent.trim() === 'Сватбен ден';
-                openServicesPopup(isWedding);
+                var isBaptism = serviceItem.querySelector('b') &&
+                    serviceItem.querySelector('b').textContent.trim() === 'Свето Кръщение';
+                openServicesPopup(isWedding, isBaptism);
             });
         });
 
