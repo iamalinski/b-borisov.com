@@ -43,6 +43,10 @@
     <meta name="msapplication-TileImage" content="{{ asset('images/app/favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
 
+    <meta name="title" content="Сватбен фотограф | Кръщенета, балове и събития">
+    <meta name="description"
+        content="Професионален фотограф от Велико Търново за сватби, кръщенета, балове и събития. Емоционални кадри, които остават завинаги.">
+
     @php
         $jsonLd = [
             '@context' => 'https://schema.org',
@@ -55,66 +59,104 @@
                     'logo' => 'https://b-borisov.com/images/app/header-brand.svg',
                     'description' => 'Професионален фотограф за сватби, кръщенета, корпоративни събития и фотосесии.',
                     'email' => 'photography.borisov@gmail.com',
-                    'telephone' => '+359883375611'
+                    'telephone' => '+359883375611',
                 ],
                 [
                     '@type' => 'WebSite',
                     '@id' => 'https://b-borisov.com/#website',
                     'url' => 'https://b-borisov.com',
                     'name' => 'Борис Борисов Photography',
-                    'publisher' => [ '@id' => 'https://b-borisov.com' ]
+                    'publisher' => ['@id' => 'https://b-borisov.com'],
                 ],
                 [
                     '@type' => 'Service',
                     '@id' => 'https://b-borisov.com',
                     'serviceType' => 'Wedding Photography',
                     'name' => 'Сватбен ден',
-                    'description' => 'Пълно заснемане на сватбения ден, обработка на всички кадри, фотосесия на младоженците, дигитална галерия и електронен носител.',
-                    'provider' => [ '@id' => 'https://b-borisov.com' ],
-                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
-                    'offers' => [ [ '@type' => 'Offer', 'price' => '500', 'priceCurrency' => 'EUR' ] ]
+                    'description' =>
+                        'Пълно заснемане на сватбения ден, обработка на всички кадри, фотосесия на младоженците, дигитална галерия и електронен носител.',
+                    'provider' => ['@id' => 'https://b-borisov.com'],
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
+                    'offers' => [['@type' => 'Offer', 'price' => '500', 'priceCurrency' => 'EUR']],
                 ],
                 [
                     '@type' => 'Service',
                     '@id' => 'https://b-borisov.com',
                     'serviceType' => 'Baptism Photography',
                     'name' => 'Свето Кръщение',
-                    'description' => 'Заснемане на ритуала и празненството, обработка на всички кадри, дигитална галерия и електронен носител.',
-                    'provider' => [ '@id' => 'https://b-borisov.com' ],
-                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
-                    'offers' => [ [ '@type' => 'Offer', 'price' => '200', 'priceCurrency' => 'EUR' ] ]
+                    'description' =>
+                        'Заснемане на ритуала и празненството, обработка на всички кадри, дигитална галерия и електронен носител.',
+                    'provider' => ['@id' => 'https://b-borisov.com'],
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
+                    'offers' => [['@type' => 'Offer', 'price' => '200', 'priceCurrency' => 'EUR']],
                 ],
                 [
                     '@type' => 'Service',
                     '@id' => 'https://b-borisov.com',
                     'serviceType' => 'Corporate Event Photography',
                     'name' => 'Корпоративно събитие',
-                    'description' => 'Заснемане на корпоративни събития, обработка на всички кадри, бърза доставка на снимки.',
-                    'provider' => [ '@id' => 'https://b-borisov.com' ],
-                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
-                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
+                    'description' =>
+                        'Заснемане на корпоративни събития, обработка на всички кадри, бърза доставка на снимки.',
+                    'provider' => ['@id' => 'https://b-borisov.com'],
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
+                    'offers' => [
+                        [
+                            '@type' => 'Offer',
+                            'price' => '80',
+                            'priceCurrency' => 'EUR',
+                            'priceSpecification' => [
+                                '@type' => 'PriceSpecification',
+                                'price' => '80',
+                                'priceCurrency' => 'EUR',
+                            ],
+                        ],
+                    ],
                 ],
                 [
                     '@type' => 'Service',
                     '@id' => 'https://b-borisov.com',
                     'serviceType' => 'Photoshoot',
                     'name' => 'Фотосесии',
-                    'description' => 'Професионални фотосесии за различни поводи, обработка на всички кадри, дигитална галерия.',
-                    'provider' => [ '@id' => 'https://b-borisov.com' ],
-                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
-                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
+                    'description' =>
+                        'Професионални фотосесии за различни поводи, обработка на всички кадри, дигитална галерия.',
+                    'provider' => ['@id' => 'https://b-borisov.com'],
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
+                    'offers' => [
+                        [
+                            '@type' => 'Offer',
+                            'price' => '80',
+                            'priceCurrency' => 'EUR',
+                            'priceSpecification' => [
+                                '@type' => 'PriceSpecification',
+                                'price' => '80',
+                                'priceCurrency' => 'EUR',
+                            ],
+                        ],
+                    ],
                 ],
                 [
                     '@type' => 'Service',
                     '@id' => 'https://b-borisov.com',
                     'serviceType' => 'Celebration Photography',
                     'name' => 'Вашият празник',
-                    'description' => 'Заснемане на балове, рождени дни и други празници, обработка на всички кадри, дигитална галерия.',
-                    'provider' => [ '@id' => 'https://b-borisov.com' ],
-                    'areaServed' => [ '@type' => 'Country', 'name' => 'Bulgaria' ],
-                    'offers' => [ [ '@type' => 'Offer', 'price' => '80', 'priceCurrency' => 'EUR', 'priceSpecification' => [ '@type' => 'PriceSpecification', 'price' => '80', 'priceCurrency' => 'EUR' ] ] ]
-                ]
-            ]
+                    'description' =>
+                        'Заснемане на балове, рождени дни и други празници, обработка на всички кадри, дигитална галерия.',
+                    'provider' => ['@id' => 'https://b-borisov.com'],
+                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
+                    'offers' => [
+                        [
+                            '@type' => 'Offer',
+                            'price' => '80',
+                            'priceCurrency' => 'EUR',
+                            'priceSpecification' => [
+                                '@type' => 'PriceSpecification',
+                                'price' => '80',
+                                'priceCurrency' => 'EUR',
+                            ],
+                        ],
+                    ],
+                ],
+            ],
         ];
     @endphp
     <script type="application/ld+json">
@@ -406,7 +448,7 @@
                                             Сет от подбрани снимки до 14 дни след събитието
                                         </li>
                                         <li>
-                                            Дигитална галерия + електронен носител (флаш памет)
+                                            Дигитална галерия + луксозна кутия с електронен носител (флаш памет)
                                         </li>
                                         <li>
                                             Фотоалбум с 30 избрани фотографии във формат 15х20 см на премиум хартия
@@ -682,7 +724,9 @@
                     <strong>© {{ date('Y') }} Борис Борисов</strong>. Всички права запазени.
                 </div>
                 <div class="right">
-
+                    <span>
+                        Авторски права
+                    </span>
                 </div>
             </div>
         </div>
@@ -698,6 +742,23 @@
             </div>
             <div class="services-popup-body">
                 <ul id="services-popup-list"></ul>
+            </div>
+        </div>
+    </div>
+    <div class="services-popup-overlay" id="author-rights-popup-overlay">
+        <div class="services-popup">
+            <div class="services-popup-header">
+                <h3>Авторски права</h3>
+                <div class="services-popup-close" id="author-rights-popup-close">
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+            <div class="services-popup-body">
+                <p>
+                    Всички материали заснети по време на събитията са със запазени авторски права. Кадрите могат да се
+                    използват за реклама и портфолио както в електронен вариант, така и в печатни издания.
+                </p>
             </div>
         </div>
     </div>
@@ -779,6 +840,55 @@
                 section: section,
                 chars: chars
             });
+        });
+
+        // Professional section text parallax opacity
+        var professionalSection = document.querySelector('#home-professional');
+        var professionalText = professionalSection.querySelector('p');
+        gsap.set(professionalText, { opacity: 0, y: 30 });
+
+        gsap.to(professionalText, {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: professionalText,
+                start: 'top 90%',
+                end: 'top 40%',
+                scrub: true
+            }
+        });
+
+        // Animate professional author image and icons with scroll-based opacity
+        var professionalAuthorImg = document.querySelector('#home-professional .author > img');
+        var professionalAuthorIcons = document.querySelectorAll('#home-professional .author ul li');
+
+        gsap.set(professionalAuthorImg, { opacity: 0, y: 30 });
+        gsap.set(professionalAuthorIcons, { opacity: 0, y: 30 });
+
+        gsap.to(professionalAuthorImg, {
+            opacity: 1,
+            y: 0,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: professionalAuthorImg,
+                start: 'top 80%',
+                end: 'top 40%',
+                scrub: true
+            }
+        });
+
+        gsap.to(professionalAuthorIcons, {
+            opacity: 1,
+            y: 0,
+            stagger: 0.15,
+            ease: "power2.out",
+            scrollTrigger: {
+                trigger: professionalAuthorImg,
+                start: 'top 75%',
+                end: 'top 35%',
+                scrub: true
+            }
         });
 
         var frameTop = document.querySelector('#home-frame .picture');
@@ -897,13 +1007,14 @@
         });
 
         // Services accordion (no animation, just click handler)
-        document.querySelectorAll('#home-services ul.services li').forEach(function(item) {
-            item.addEventListener('click', function() {
-                if (this.classList.contains('expanded')) return;
+        document.querySelectorAll('#home-services ul.services li .container > b').forEach(function(bElem) {
+            bElem.addEventListener('click', function(e) {
+                e.stopPropagation();
+                var self = bElem.closest('li');
+                if (self.classList.contains('expanded')) return;
 
                 var expandedItem = document.querySelector('#home-services ul.services li.expanded');
-                var isBase = this.classList.contains('base');
-                var self = this;
+                var isBase = self.classList.contains('base');
                 var body = self.querySelector('.body');
 
                 if (expandedItem) {
@@ -1125,6 +1236,71 @@
             e.stopPropagation();
             closeServicesPopup();
         });
+        // Author rights popup logic
+        var authorRightsPopupOverlay = document.getElementById('author-rights-popup-overlay');
+        var authorRightsPopupClose = document.getElementById('author-rights-popup-close');
+        var authorRightsPopup = authorRightsPopupOverlay ? authorRightsPopupOverlay.querySelector('.services-popup') : null;
+
+        function openAuthorRightsPopup() {
+            if (!authorRightsPopupOverlay) return;
+            authorRightsPopupOverlay.classList.add('active');
+            document.body.style.overflow = 'hidden';
+            if (authorRightsPopup) {
+                gsap.set(authorRightsPopup, {
+                    opacity: 0,
+                    y: 40
+                });
+                gsap.to(authorRightsPopup, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.5,
+                    ease: "power2.out"
+                });
+            }
+        }
+
+        function closeAuthorRightsPopup() {
+            if (!authorRightsPopupOverlay) return;
+            if (authorRightsPopup) {
+                gsap.to(authorRightsPopup, {
+                    opacity: 0,
+                    y: 30,
+                    duration: 0.3,
+                    ease: "power2.in",
+                    onComplete: function() {
+                        authorRightsPopupOverlay.classList.remove('active');
+                        document.body.style.overflow = '';
+                    }
+                });
+            } else {
+                authorRightsPopupOverlay.classList.remove('active');
+                document.body.style.overflow = '';
+            }
+        }
+
+        if (authorRightsPopupClose) {
+            authorRightsPopupClose.addEventListener('click', function(e) {
+                e.stopPropagation();
+                closeAuthorRightsPopup();
+            });
+        }
+        if (authorRightsPopupOverlay) {
+            authorRightsPopupOverlay.addEventListener('click', function(e) {
+                if (e.target === authorRightsPopupOverlay) {
+                    closeAuthorRightsPopup();
+                }
+            });
+        }
+
+        // Footer author rights trigger
+        var authorRightsTrigger = document.querySelector('footer .wrapper .bottom .right span');
+        if (authorRightsTrigger) {
+            authorRightsTrigger.style.cursor = 'pointer';
+            authorRightsTrigger.addEventListener('click', function(e) {
+                e.preventDefault();
+                openAuthorRightsPopup();
+            });
+        }
 
         popupOverlay.addEventListener('click', function(e) {
             if (e.target === popupOverlay) {
