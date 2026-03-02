@@ -16,7 +16,7 @@
 
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Boris Borisov Photography</title>
+    <title>Сватбен фотограф | Кръщенета, балове и събития</title>
     @vite(['resources/js/app.js', 'resources/scss/app.scss'])
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
@@ -42,6 +42,8 @@
     <meta name="msapplication-TileColor" content="#ffffff">
     <meta name="msapplication-TileImage" content="{{ asset('images/app/favicons/ms-icon-144x144.png') }}">
     <meta name="theme-color" content="#ffffff">
+
+    <link rel="canonical" href="{{ URL::to('/') }}" />
 
     <meta name="title" content="Сватбен фотограф | Кръщенета, балове и събития">
     <meta name="description"
@@ -845,7 +847,10 @@
         // Professional section text parallax opacity
         var professionalSection = document.querySelector('#home-professional');
         var professionalText = professionalSection.querySelector('p');
-        gsap.set(professionalText, { opacity: 0, y: 30 });
+        gsap.set(professionalText, {
+            opacity: 0,
+            y: 30
+        });
 
         gsap.to(professionalText, {
             opacity: 1,
@@ -863,8 +868,14 @@
         var professionalAuthorImg = document.querySelector('#home-professional .author > img');
         var professionalAuthorIcons = document.querySelectorAll('#home-professional .author ul li');
 
-        gsap.set(professionalAuthorImg, { opacity: 0, y: 30 });
-        gsap.set(professionalAuthorIcons, { opacity: 0, y: 30 });
+        gsap.set(professionalAuthorImg, {
+            opacity: 0,
+            y: 30
+        });
+        gsap.set(professionalAuthorIcons, {
+            opacity: 0,
+            y: 30
+        });
 
         gsap.to(professionalAuthorImg, {
             opacity: 1,
