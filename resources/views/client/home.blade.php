@@ -3,15 +3,18 @@
 
 <head>
     <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-DJL1XR38MV"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-17979324056"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
-
-        function gtag() {
-            dataLayer.push(arguments);
-        }
+        function gtag(){dataLayer.push(arguments);}
         gtag('js', new Date());
-        gtag('config', 'G-DJL1XR38MV');
+
+        gtag('config', 'AW-17979324056');
+    </script>
+
+    <!-- Event snippet for Показване на страница conversion page -->
+    <script>
+        gtag('event', 'conversion', {'send_to': 'AW-17979324056/J8FvCPH5iYIcEJjtmv1C'});
     </script>
 
     <meta charset="UTF-8">
