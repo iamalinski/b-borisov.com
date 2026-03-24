@@ -770,6 +770,12 @@
     <script>
         gsap.registerPlugin(ScrollTrigger);
 
+        // Detect iOS Safari
+        function isIOSSafari() {
+            const ua = navigator.userAgent;
+            return /iPad|iPhone|iPod/.test(ua) && /Safari/.test(ua) && !/Chrome/.test(ua);
+        }
+
         function splitTextToChars(element) {
             const text = element.innerHTML;
             let chars = '';
@@ -830,9 +836,17 @@
 
         var heroUl = document.querySelector('#home-hero ul');
         var heroListItems = heroUl.querySelectorAll('li');
-        gsap.set(heroListItems, {
-            opacity: 0
-        });
+
+        // On iOS Safari, make hero list items visible immediately
+        if (isIOSSafari()) {
+            gsap.set(heroListItems, {
+                opacity: 0
+            });
+        } else {
+            gsap.set(heroListItems, {
+                opacity: 0
+            });
+        }
 
         var h1 = document.querySelector('#home-hero h1');
         var h1Chars = splitTextToChars(h1);
@@ -1337,6 +1351,15 @@
         // === Animation triggers (run after loading overlay hides) ===
 
         function initAnimations() {
+            // iOS Safari: Simple fade-in for hero list items
+            if (isIOSSafari()) {
+                gsap.to(heroListItems, {
+                    opacity: 1,
+                    duration: 1.2,
+                    ease: "power2.out"
+                });
+            }
+
             // H1 char animation
             animateChars(h1Chars, 1, initListAnimation);
 
@@ -1436,6 +1459,11 @@
         }
 
         function initListAnimation() {
+            // Skip animation on iOS Safari
+            if (isIOSSafari()) {
+                return;
+            }
+
             gsap.set(heroListItems, {
                 opacity: 0
             });

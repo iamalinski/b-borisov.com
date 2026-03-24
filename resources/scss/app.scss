@@ -490,9 +490,7 @@ section#home-hero {
     }
 
     ul {
-        display: flex;
-        justify-content: center;
-        align-items: center;
+        display: block;
         position: relative;
         width: 100%;
         height: 575px; // колкото е средното (3) изображение
