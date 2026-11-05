@@ -22,8 +22,9 @@
     <title>Сватбен фотограф | Кръщенета, балове и събития</title>
     @vite(['resources/js/app.js', 'resources/scss/app.scss'])
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollTrigger.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.13.0/ScrollSmoother.min.js"></script>
 
     <meta name="og:image" content="{{ asset('images/app/og.jpg') }}">
 
@@ -95,72 +96,6 @@
                     'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
                     'offers' => [['@type' => 'Offer', 'price' => '200', 'priceCurrency' => 'EUR']],
                 ],
-                [
-                    '@type' => 'Service',
-                    '@id' => 'https://b-borisov.com',
-                    'serviceType' => 'Corporate Event Photography',
-                    'name' => 'Корпоративно събитие',
-                    'description' =>
-                        'Заснемане на корпоративни събития, обработка на всички кадри, бърза доставка на снимки.',
-                    'provider' => ['@id' => 'https://b-borisov.com'],
-                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
-                    'offers' => [
-                        [
-                            '@type' => 'Offer',
-                            'price' => '80',
-                            'priceCurrency' => 'EUR',
-                            'priceSpecification' => [
-                                '@type' => 'PriceSpecification',
-                                'price' => '80',
-                                'priceCurrency' => 'EUR',
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    '@type' => 'Service',
-                    '@id' => 'https://b-borisov.com',
-                    'serviceType' => 'Photoshoot',
-                    'name' => 'Фотосесии',
-                    'description' =>
-                        'Професионални фотосесии за различни поводи, обработка на всички кадри, дигитална галерия.',
-                    'provider' => ['@id' => 'https://b-borisov.com'],
-                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
-                    'offers' => [
-                        [
-                            '@type' => 'Offer',
-                            'price' => '80',
-                            'priceCurrency' => 'EUR',
-                            'priceSpecification' => [
-                                '@type' => 'PriceSpecification',
-                                'price' => '80',
-                                'priceCurrency' => 'EUR',
-                            ],
-                        ],
-                    ],
-                ],
-                [
-                    '@type' => 'Service',
-                    '@id' => 'https://b-borisov.com',
-                    'serviceType' => 'Celebration Photography',
-                    'name' => 'Вашият празник',
-                    'description' =>
-                        'Заснемане на балове, рождени дни и други празници, обработка на всички кадри, дигитална галерия.',
-                    'provider' => ['@id' => 'https://b-borisov.com'],
-                    'areaServed' => ['@type' => 'Country', 'name' => 'Bulgaria'],
-                    'offers' => [
-                        [
-                            '@type' => 'Offer',
-                            'price' => '80',
-                            'priceCurrency' => 'EUR',
-                            'priceSpecification' => [
-                                '@type' => 'PriceSpecification',
-                                'price' => '80',
-                                'priceCurrency' => 'EUR',
-                            ],
-                        ],
-                    ],
-                ],
             ],
         ];
     @endphp
@@ -171,7 +106,7 @@
 
 <body>
     <div class="loading-overlay" id="loading-overlay">
-        <div href="{{ route('home') }}" class="brand">
+        <div class="brand">
             <img src="{{ asset('images/app/loading-brand.svg') }}" alt="Boris Borisov Photography">
             <div>
                 <span>
@@ -181,573 +116,443 @@
             </div>
         </div>
     </div>
-    <header>
-        <a href="{{ route('home') }}" class="brand">
-            <img src="{{ asset('images/app/header-brand.svg') }}" alt="Boris Borisov Photography">
-            <div>
-                <span>
-                    Boris Borisov
-                </span>
-                Photography
-            </div>
-        </a>
-        <a href="tel:+359883375611" class="call">
-            <img src="{{ asset('images/app/phone.svg') }}" alt="Call">
-        </a>
-        <div class="menu">
-            <span></span>
-            <span></span>
-            <span></span>
+    <div class="menu-overlay" aria-hidden="true">
+        <div class="header">
+            <a href="{{ route('home') }}" class="brand">
+                <picture>
+                    <source media="(max-width: 760px)" srcset="{{ asset('images/app/menu-brand-mobile.svg') }}">
+                    <img src="{{ asset('images/app/header-brand-new.svg') }}" alt="Boris Borisov Photography">
+                </picture>
+            </a>
+            <button type="button" class="close-menu" aria-label="Затвори менюто">
+                <img src="{{ asset('images/home/icons/menu-close.svg') }}" alt="">
+            </button>
         </div>
-        <div class="menu-overlay">
-            <div class="header">
+        <nav class="main">
+            <ul>
+                <li><a href="#home-stories">Услуги</a></li>
+                <li><a href="#home-gallery">Портфолио</a></li>
+                <li><a href="#home-services">Пакети</a></li>
+                <li><a href="#home-about">За мен</a></li>
+            </ul>
+        </nav>
+        <div class="footer">
+            <img src="{{ asset('images/app/footer-bb.svg') }}" alt="Boris Borisov" class="bb">
+            <b>ЗАПАЗИ</b>
+            <p>своя снимачен ден</p>
+            <ul>
+                <li>
+                    <a href="tel:+359883375611" title="Обадете се">+359 883 375 611</a>
+                </li>
+                <li>
+                    <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">photography.borisov@gmail.com</a>
+                </li>
+            </ul>
+            <p class="copy"><strong>© {{ date('Y') }} Борис Борисов</strong>. Всички права запазени.</p>
+        </div>
+    </div>
+    <div id="smooth-wrapper">
+        <div id="smooth-content">
+            <header>
                 <a href="{{ route('home') }}" class="brand">
-                    <img src="{{ asset('images/app/header-brand.svg') }}" alt="Boris Borisov Photography">
-                    <div>
-                        <span>
-                            Boris Borisov
-                        </span>
-                        Photography
-                    </div>
+                    <img src="{{ asset('images/app/header-brand-new.svg') }}" alt="Boris Borisov Photography">
                 </a>
-                <div class="close-menu">
-                    <span></span>
-                    <span></span>
+                <a href="tel:+359883375611" class="call">
+                    <img src="{{ asset('images/app/phone.svg') }}" alt="Call">
+                </a>
+                <div class="menu">
+                    <img src="{{ asset('images/home/icons/menu.svg') }}" alt="Menu">
                 </div>
-            </div>
-            <div class="main">
-                <ul>
-                    <li>
-                        <a href="{{ URL::to('#home-professional') }}">
-                            ЗА МЕН
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::to('#home-gallery') }}">
-                            ПОРТФОЛИО
-                        </a>
-                    </li>
-                    <li>
-                        <a href="{{ URL::to('#home-services') }}">
-                            УСЛУГИ
-                        </a>
-                    </li>
-                </ul>
-            </div>
-            <div class="footer">
-                <svg width="164" height="139" viewBox="0 0 164 139" fill="none"
-                    xmlns="http://www.w3.org/2000/svg">
-                    <path
-                        d="M60.7709 96.5186C58.8783 96.5186 56.9858 96.5186 54.883 96.5186C52.5699 96.5186 50.0466 96.5186 47.5232 96.5186C35.1167 98.8317 20.6074 100.724 9.88317 101.355C9.67289 101.355 9.46261 101.355 9.25233 101.355C7.14953 101.355 2.38367e-05 100.934 2.38367e-05 99.8831C2.38367e-05 99.4625 1.05142 99.0419 3.3645 98.4111C7.57009 97.57 14.7196 96.9392 18.9252 96.5186C26.0747 95.6775 34.2756 95.2569 42.6868 94.6261C50.6774 93.1541 58.2475 91.2616 65.8176 89.3691C67.0792 87.4766 68.5512 85.584 69.6026 84.1121C67.4998 84.3224 65.6073 84.5327 63.5045 84.5327C49.4157 84.5327 36.3784 77.3831 36.3784 63.2944C36.3784 58.6683 38.0606 54.2524 39.112 51.5187C40.7943 46.472 43.5279 42.4767 48.5746 36.3786C52.9905 30.9113 60.14 23.7618 69.8129 17.2431C83.9016 7.99085 103.247 0.000211311 127.009 0.000211311C127.43 0.000211311 127.64 0.000211311 128.06 0.000211311C145.514 0.210501 163.177 4.41609 163.177 21.4487C163.177 23.7618 162.336 27.5469 162.126 28.5983C161.285 32.5936 159.392 36.1683 156.448 40.7945C153.504 45.4206 149.299 50.6776 143.621 56.1449C134.579 64.5561 121.542 72.757 110.187 77.8037C106.402 79.4859 104.088 80.5373 104.088 80.5373C95.2567 84.3224 79.4857 89.1588 66.6587 92.313C66.2381 92.9438 65.8176 93.5747 65.397 94.2055C69.8129 94.2055 75.2802 94.6261 78.0138 95.2569C80.3269 95.6775 84.953 98.2008 84.953 101.986C84.953 105.35 82.6399 108.084 80.5371 110.397C74.2288 117.967 63.925 126.168 55.9344 131.425C51.5185 134.579 47.1027 136.892 42.4765 138.364C41.8457 138.575 41.2148 138.785 40.7943 138.785C38.9018 138.785 38.2709 137.523 38.2709 135.841C38.2709 134.579 38.6915 132.897 39.3223 131.425C40.1634 129.533 41.2148 127.219 42.6868 124.486C47.1027 116.495 54.883 104.93 60.7709 96.5186ZM37.2195 62.8738C37.2195 76.3317 49.626 82.8504 63.0839 82.8504C65.6073 82.8504 68.3409 82.4299 71.0746 82.0093C74.6493 76.9626 77.8035 72.757 80.1166 69.6028C84.5325 63.5047 91.2614 54.2524 95.2567 47.7337C95.8876 46.6823 96.7287 45.8412 96.7287 45.0001H96.5184C96.5184 44.7898 96.5184 44.7898 96.5184 44.5795C96.5184 43.7384 97.3595 42.8973 98.2006 42.8973C99.4623 42.8973 99.8829 43.5281 99.8829 44.3692C99.8829 46.0515 98.4109 48.5748 97.9904 49.4159C93.7848 55.9346 86.8455 65.1869 82.4297 71.285C80.9577 73.1775 77.1727 78.2243 74.8596 81.3785C80.3269 80.3271 86.8455 78.014 90.4203 76.7523C93.1539 75.9112 101.355 72.757 103.668 71.0747C103.878 70.8645 104.088 70.8645 104.299 70.8645C104.93 70.8645 105.56 71.4953 105.56 72.1261C105.56 73.8084 101.775 74.6495 100.303 75.2803C98.6212 75.9112 91.682 78.4345 91.0511 78.6448C87.0558 80.1168 79.4857 82.4299 73.1774 83.4813C72.126 85.1635 70.8643 86.6354 69.8129 88.3177C81.7988 84.7429 94.2053 80.1168 102.617 76.9626C121.752 69.1822 142.78 55.0935 153.294 38.6917C156.238 34.0655 157.079 31.3319 158.551 27.5469C159.182 25.8646 159.392 23.5515 159.392 21.2385C159.392 18.7151 158.971 16.402 158.13 14.5095C153.504 5.46749 139.626 2.73385 125.537 2.73385C124.906 2.73385 124.275 2.73385 123.644 2.73385C90.21 3.36469 64.5559 19.9768 49.4157 37.2197C44.1588 43.3178 42.4765 47.1029 39.7429 51.729C38.6915 54.0421 37.2195 58.6683 37.2195 62.8738ZM63.0839 93.1541C61.8223 93.5747 60.3503 93.785 59.0886 94.2055C60.14 94.2055 61.4017 94.2055 62.4531 94.2055C62.6634 93.785 62.8737 93.5747 63.0839 93.1541ZM63.5045 96.7289C57.4064 105.14 48.9952 117.126 44.1588 125.327C42.056 128.902 40.584 131.215 39.7429 134.579C38.9018 137.103 39.5326 137.944 42.2662 137.733C46.4718 136.682 51.3083 133.318 55.3036 130.374C62.8737 125.117 72.9671 116.705 79.0652 109.135C80.3269 107.243 82.4297 104.719 82.4297 102.406C82.4297 101.145 81.7988 100.093 80.1166 99.2522C78.6446 98.4111 77.1727 98.2008 77.1727 98.2008C74.0185 97.3597 68.7615 96.7289 63.5045 96.7289ZM30.4906 97.1494C26.0747 97.3597 22.0794 97.57 19.1355 97.7803C14.7196 98.2008 6.93925 98.8317 2.94394 99.8831C3.57478 100.093 4.20562 100.093 4.83646 100.093C6.72897 100.093 8.83177 99.8831 9.67289 99.8831C14.9299 99.4625 21.4486 98.6214 30.4906 97.1494ZM99.4327 95.4672C100.274 94.2055 103.849 90.4205 106.372 90.4205C107.423 90.4205 108.264 91.0513 108.895 92.5233C109.106 92.9438 109.316 93.785 109.316 94.4158C109.316 97.1494 107.213 100.093 106.162 101.565C103.638 104.93 99.0122 109.766 93.9655 110.187C93.5449 110.187 93.3346 110.187 93.1244 110.187C91.0216 110.187 90.1804 109.135 90.1804 107.453C90.1804 102.827 96.2786 93.785 97.3299 92.5233C104.69 81.799 115.204 68.972 125.087 58.6683C128.031 55.3038 130.134 52.3599 133.498 50.4673C135.811 49.2057 136.021 51.729 135.18 53.201C132.236 58.0374 128.241 62.6636 124.246 67.2897C116.886 75.7009 107.003 86.4252 100.484 93.9952C100.064 94.4158 99.8533 94.8364 99.4327 95.4672ZM105.741 86.4252C114.363 76.9626 124.877 65.8178 132.026 54.8832C123.405 63.715 112.891 77.1729 105.741 86.4252ZM103.008 99.2522C103.428 98.4111 105.741 95.0466 105.741 93.5747C105.741 93.1541 105.531 92.7336 105.11 92.7336C104.69 92.7336 104.269 92.9438 103.849 93.1541C99.0122 95.0466 95.0169 100.934 93.1244 105.771C92.9141 106.402 92.9141 106.612 92.9141 107.243C92.9141 107.453 92.9141 107.663 93.3346 107.663C94.386 107.663 97.7505 105.35 98.1711 104.93C99.8533 103.458 101.746 100.934 103.008 99.2522Z"
-                        fill="#DBC2A3" />
-                </svg>
-                <b>
-                    ЗАПАЗИ
-                </b>
-                <p>
-                    своя снимачен ден
-                </p>
-                <ul>
-                    <li>
-                        <a href="tel:+359883375611" title="Обадете се">
-                            +359 883 375 611
-                        </a>
-                    </li>
-                    <li>
-                        <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">
-                            photography.borisov@gmail.com
-                        </a>
-                    </li>
-                </ul>
-                <div class="bottom">
-                    <div class="left">
-                        <strong>© {{ date('Y') }} Борис Борисов</strong>. Всички права запазени.
-                    </div>
-                    <div class="right">
-
-                    </div>
+            </header>
+            <main>
+                <div class="hero-wrapper">
+                    <section id="home-hero">
+                        <h1>
+                            <span class="name">Борис Борисов</span>
+                            <strong>Фотограф</strong>
+                        </h1>
+                        <ul>
+                            <li><img src="{{ asset('images/home/hero/hero-1.png') }}" alt="Сватбена двойка"></li>
+                            <li><img src="{{ asset('images/home/hero/hero-2.png') }}" alt="Булка на залез"></li>
+                            <li><img src="{{ asset('images/home/hero/hero-3.png') }}" alt="Младоженци под воала"></li>
+                            <li><img src="{{ asset('images/home/hero/hero-4.png') }}" alt="Фотосесия с чадър"></li>
+                            <li><img src="{{ asset('images/home/hero/hero-5.png') }}" alt="Портрет в зелена рокля"></li>
+                        </ul>
+                    </section>
+                    <section id="home-marquee" aria-label="Заснемани събития">
+                        <div class="track">
+                            <ul>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-graduation.svg') }}" alt="">
+                                    <span>Абитуриентски<br />балове</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-microphone.svg') }}" alt="">
+                                    <span>концерти<br />и фестивали</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-cheers.svg') }}" alt="">
+                                    <span>корпоративни<br />събития</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-cake.svg') }}" alt="">
+                                    <span>рождени<br />дни</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-studio-light.svg') }}" alt="">
+                                    <span>художествени<br />фотосесии</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-rings.svg') }}" alt="">
+                                    <span>сватбени<br />тържества</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-church.svg') }}" alt="">
+                                    <span>свето<br />кръщение</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-conference.svg') }}" alt="">
+                                    <span>изложения и<br />конференции</span>
+                                </li>
+                                <li>
+                                    <img src="{{ asset('images/home/icons/marquee-party.svg') }}" alt="">
+                                    <span>детски<br />партита</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </section>
                 </div>
-            </div>
-        </div>
-    </header>
-    <main>
-        <section id="home-hero">
-            <h1>Борис<br />Борисов<br /><strong>Фотограф</strong></h1>
-            <ul>
-                <li><img src="{{ asset('images/home/hero-1.png') }}" alt="Hero 1"></li>
-                <li><img src="{{ asset('images/home/hero-2.png') }}" alt="Hero 2"></li>
-                <li><img src="{{ asset('images/home/hero-3.png') }}" alt="Hero 3"></li>
-                <li><img src="{{ asset('images/home/hero-4.png') }}" alt="Hero 4"></li>
-                <li><img src="{{ asset('images/home/hero-5.png') }}" alt="Hero 5"></li>
-            </ul>
-        </section>
-        <section id="home-professional">
-            <h2>професионално<br />заснемане</h2>
-            <ul>
-                <li>
-                    <img src="{{ asset('images/home/icons/professional-1.svg') }}" alt="Professional 1">
-                    <span>
-                        сватба
-                    </span>
-                </li>
-                <li>
-                    <img src="{{ asset('images/home/icons/professional-2.svg') }}" alt="Professional 2">
-                    <span>
-                        вашето<br /> събитие
-                    </span>
-                </li>
-                <li>
-                    <img src="{{ asset('images/home/icons/professional-3.svg') }}" alt="Professional 3">
-                    <span>
-                        кръщене
-                    </span>
-                </li>
-            </ul>
-            <p>
-                “Събитията имат свой ритъм, който не се вижда, а се усеща. Той крие в себе си жестовете, паузите,
-                погледите, несъвършените моменти, в които една ситуация разкрива истинския си характер.<br /> Затова
-                следвам
-                този ритъм внимателно и го превръщам в последователност от
-                образи, които говорят без обяснение.”
-            </p>
-            <div class="author">
-                <img src="{{ asset('images/home/author.jpg') }}" alt="Author">
-                <ul>
-                    <li>
-                        <img src="{{ asset('images/home/professional-author-1.svg') }}" alt="Professional Author 1">
-                    </li>
-                    <li>
-                        <img src="{{ asset('images/home/professional-author-2.svg') }}" alt="Professional Author 2">
-                    </li>
-                </ul>
-            </div>
-        </section>
-        <section id="home-frame">
-            <h2>Истории в кадър</h2>
-            <div class="picture">
-                <div class="top">
-
-                </div>
-                <div class="bottom">
+                <section id="home-quote">
                     <p>
-                        Подбрани мигове, уловени естествено, които пресъздават атмосферата, емоцията и духа на
-                        събитието.
-                        Чрез внимание към детайла и неподправени моменти, всяка фотография разказва историята такава,
-                        каквато се случва – истинска, жива и непринудена.
+                        всяка фотография<br />разказва <em class="accent">историята</em><br />такава, каквато се
+                        случва–<br />истинска, <em>жива,<br />непринудена</em>
                     </p>
-                </div>
-            </div>
-        </section>
-        <section id="home-gallery">
-            <div class="row">
-                <ul class="col">
-                    <li><img src="{{ asset('images/home/gallery-1-1.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-2.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-3.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-4.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-5.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-6.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-1-7.jpg') }}" alt=""></li>
-                </ul>
-                <ul class="col">
-                    <li><img src="{{ asset('images/home/gallery-2-1.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-2.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-3.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-4.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-5.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-6.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-2-7.jpg') }}" alt=""></li>
-                </ul>
-                <ul class="col">
-                    <li><img src="{{ asset('images/home/gallery-3-6.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-3-5.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-3-4.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-3-3.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-3-2.jpg') }}" alt=""></li>
-                    <li><img src="{{ asset('images/home/gallery-3-1.jpg') }}" alt=""></li>
-                </ul>
-            </div>
-        </section>
-        <section id="home-services">
-            <h2>Услуги и<br /> пакетни предложения</h2>
-            <ul class="services">
-                <li class="expanded base">
-                    <div class="container">
-                        <b>
-                            Сватбен ден
-                        </b>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="header">
-                                        <strong>
-                                            Стандарт
-                                        </strong>
-                                    </div>
-                                    <ul class="main">
-                                        <li>
-                                            8 снимачни часа
-                                        </li>
-                                        <li>
-                                            Пълен документален разказ на деня
-                                        </li>
-                                        <li>
-                                            600+ кадъра
-                                        </li>
-                                        <li>
-                                            Обработка на всички кадри
-                                        </li>
-                                        <li>
-                                            Фотосесия на младоженците по време на сватбения ден
-                                        </li>
-                                        <li>
-                                            Сет от подбрани снимки до 14 дни след събитието
-                                        </li>
-                                        <li>
-                                            Дигитална галерия + електронен носител (флаш памет)
-                                        </li>
-                                        <li>
-                                            До 45 дни срок за получаване
-                                        </li>
-                                        <li>
-                                            Възможност за удължаване на снимачния ден
-                                        </li>
-                                    </ul>
-                                    <div class="footer">
-                                        <div class="price">
-                                            <span>
-                                                цена
-                                            </span>
-                                            <strong>
-                                                500 €
-                                            </strong>
-                                        </div>
-                                        <span class="link">
-                                            Виж допълнителни услуги
-                                        </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header">
-                                        <strong>
-                                            Премиум
-                                        </strong>
-                                    </div>
-                                    <ul class="main">
-                                        <li>
-                                            10 снимачни часа
-                                        </li>
-                                        <li>
-                                            Пълен документален разказ на деня
-                                        </li>
-                                        <li>
-                                            800+ кадъра
-                                        </li>
-                                        <li>
-                                            Фотосесия на младоженците по време на сватбения ден
-                                        </li>
-                                        <li>
-                                            Обработка на всички кадри
-                                        </li>
-                                        <li>
-                                            Сет от подбрани снимки до 14 дни след събитието
-                                        </li>
-                                        <li>
-                                            Дигитална галерия + луксозна кутия с електронен носител (флаш памет)
-                                        </li>
-                                        <li>
-                                            Фотоалбум с 30 избрани фотографии във формат 15х20 см на премиум хартия
-                                        </li>
-                                        <li>
-                                            До 30 дни срок за получаване
-                                        </li>
-                                        <li>
-                                            Възможност за удължаване на снимачния ден
-                                        </li>
-                                    </ul>
-                                    <div class="footer">
-                                        <div class="price">
-                                            <span>
-                                                цена
-                                            </span>
-                                            <strong>
-                                                700 €
-                                            </strong>
-                                        </div>
-                                        <span class="link">
-                                            Виж допълнителни услуги
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li class="base">
-                    <div class="container">
-                        <b>
-                            Свето Кръщение
-                        </b>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    <div class="header">
-                                        <strong>
-                                            Ритуал
-                                        </strong>
-                                    </div>
-                                    <ul class="main">
-                                        <li>
-                                            200+ кадъра (Заснемане на ритуала, Снимки с гостите)
-                                        </li>
-                                        <li>
-                                            Обработка на всички кадри
-                                        </li>
-                                        <li>
-                                            Сет от подбрани снимки до 7 дни след събитието
-                                        </li>
-                                        <li>
-                                            Дигитална галерия + електронен носител (флаш памет)
-                                        </li>
-                                        <li>
-                                            До 14 дни срок за получаване
-                                        </li>
-                                        <li>
-                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                        </li>
-                                    </ul>
-                                    <div class="footer">
-                                        <div class="price">
-                                            <span>
-                                                цена
-                                            </span>
-                                            <strong>
-                                                200 €
-                                            </strong>
-                                        </div>
-                                        <span class="link">
-                                            Виж допълнителни услуги
-                                        </span>
-                                    </div>
-                                </li>
-                                <li>
-                                    <div class="header">
-                                        <strong>
-                                            Разширен
-                                        </strong>
-                                    </div>
-                                    <ul class="main">
-                                        <li>
-                                            4 снимачни часа
-                                        </li>
-                                        <li>
-                                            400+ кадъра
-                                        </li>
-                                        <li>
-                                            Заснемане на ритуала
-                                        </li>
-                                        <li>
-                                            Заснемане на празненство
-                                        </li>
-                                        <li>
-                                            Обработка на всички кадри
-                                        </li>
-                                        <li>
-                                            Сет от подбрани снимки до 7 дни след събитието
-                                        </li>
-                                        <li>
-                                            Дигитална галерия + електронен носител (флаш памет)
-                                        </li>
-                                        <li>
-                                            До 20 дни срок за получаване
-                                        </li>
-                                        <li>
-                                            Възможност за удължаване на снимачния ден
-                                        </li>
-                                        <li>
-                                            Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                        </li>
-                                    </ul>
-                                    <div class="footer">
-                                        <div class="price">
-                                            <span>
-                                                цена
-                                            </span>
-                                            <strong>
-                                                350 €
-                                            </strong>
-                                        </div>
-                                        <span class="link">
-                                            Виж допълнителни услуги
-                                        </span>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <b>
-                            Корпоративно събитие
-                        </b>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    Ангажираност по Ваш избор (минимум 2 часа) 80€/час
-                                </li>
-                                <li>
-                                    Пълен документален разказ на събитието
-                                </li>
-                                <li>
-                                    150+ кадъра
-                                </li>
-                                <li>
-                                    Обработка на всички кадри
-                                </li>
-                                <li>
-                                    Сет от подбрани снимки до няколко часа след събитието
-                                </li>
-                                <li>
-                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                </li>
-                            </ul>
-                            <span class="link">
-                                Виж допълнителни услуги
-                            </span>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <b>
-                            Фотосесии
-                        </b>
-                        <div class="body">
-                            <ul>
-                                <li>
-                                    Ангажираност по Ваш избор (минимум 2 часа) 80€/час
-                                </li>
-                                <li>
-                                    150+ кадъра
-                                </li>
-                                <li>
-                                    Обработка на всички кадри
-                                </li>
-                                <li>
-                                    Сет от подбрани снимки до 7 дни след събитието
-                                </li>
-                                <li>
-                                    Дигитална галерия за сваляне на снимките
-                                </li>
-                                <li>
-                                    До 14 дни срок за получаване
-                                </li>
-                                <li>
-                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                </li>
-                            </ul>
-                            <span class="link">
-                                Виж допълнителни услуги
-                            </span>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <div class="container">
-                        <b>
-                            Вашият празник
-                        </b>
-                        <div class="body">
+                    <p>
+                        <em class="accent">...в собствен стил</em>
+                    </p>
+                    <img src="{{ asset('images/home/icons/line-quote.svg') }}" alt="" class="line">
+                </section>
+                <section id="home-stories">
+                    <span class="script">ucmopuu b kagpu</span>
+                    <img src="{{ asset('images/home/icons/line-stories.svg') }}" alt="" class="line">
+                    <h2><span class="light">всичко,</span> <em>което си струва</em><br /><span class="light">да
+                            бъде</span> <em>запомнено</em></h2>
+                    <p class="lead">
+                        От вълнението преди голямото „Да“ до първите семейни празници. Запазете всеки специален за
+                        Вас момент
+                    </p>
+                    <ul>
+                        <li>
+                            <div class="icon">
+                                <img src="{{ asset('images/home/icons/story-wedding.svg') }}" alt="">
+                            </div>
+                            <b>Сватбено тържество</b>
                             <p>
-                                Подходящ за балове, рождени дни и др.
+                                <span>Сватбеният ден - от подготовката до</span>
+                                <span>последните емоции на празника</span>
                             </p>
-                            <ul>
-                                <li>
-                                    Ангажираност по Ваш избор (минимум 2 часа) 80€/час
-                                </li>
-                                <li>
-                                    Пълен документален разказ на събитието
-                                </li>
-                                <li>
-                                    200+ кадъра
-                                </li>
-                                <li>
-                                    Обработка на всички кадри
-                                </li>
-                                <li>
-                                    Сет от подбрани снимки до 7 дни след събитието
-                                </li>
-                                <li>
-                                    Дигитална галерия за сваляне на снимките
-                                </li>
-                                <li>
-                                    До 14 дни срок за получаване
-                                </li>
-                                <li>
-                                    Транспорта на повече от 100 км<br /> от В. Търново се поема от клиента
-                                </li>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <img src="{{ asset('images/home/icons/story-photoshoot.svg') }}" alt="">
+                            </div>
+                            <b>Фотосесия</b>
+                            <p>
+                                <span>Индивидуални и групови фотосесии,</span>
+                                <span>съобразени с вашите предпочитания</span>
+                            </p>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <img src="{{ asset('images/home/icons/story-scroll.svg') }}" alt="">
+                            </div>
+                            <b>Свето Кръщение</b>
+                            <p>
+                                <span>Фотография на кръщенето, семейни</span>
+                                <span>снимки и празничните моменти</span>
+                            </p>
+                        </li>
+                        <li>
+                            <div class="icon">
+                                <img src="{{ asset('images/home/icons/story-cheers.svg') }}" alt="">
+                            </div>
+                            <b>Вашето събитие</b>
+                            <p>
+                                <span>Корпоративни събития, рождени дни и</span>
+                                <span>други специални поводи</span>
+                            </p>
+                        </li>
+                    </ul>
+                </section>
+                <section id="home-gallery">
+                    @php
+                        // Display heights (px) of each photo at 484px width – keeps the masonry stable while images lazy-load
+                        $galleryColumns = [
+                            1 => [721, 323, 324, 727, 659, 323, 323],
+                            2 => [323, 611, 323, 659, 323, 659, 323],
+                            3 => [727, 324, 727, 323, 659, 611],
+                        ];
+                    @endphp
+                    <div class="row">
+                        @foreach ($galleryColumns as $col => $heights)
+                            <ul class="col">
+                                @foreach ($heights as $i => $height)
+                                    <li><img src="{{ asset('images/home/gallery/c' . $col . '-' . ($i + 1) . '.jpg') }}"
+                                            width="484" height="{{ $height }}" alt="Борис Борисов – портфолио"
+                                            loading="lazy"></li>
+                                @endforeach
                             </ul>
-                            <span class="link">
-                                Виж допълнителни услуги
-                            </span>
+                        @endforeach
+                    </div>
+                </section>
+                <section id="home-services">
+                    <span class="script">nakemu</span>
+                    <img src="{{ asset('images/home/icons/line-packages.svg') }}" alt="" class="line">
+                    <h2><em>начина,</em> <span class="light">по който помните</span><br /><em>важният ден</em></h2>
+                    <p class="lead">
+                        Всеки празник е различен, затова и фотографското преживяване трябва да бъде съобразено с
+                        него. Разгледайте предложенията и открийте своето.
+                    </p>
+                    <ul class="services">
+                        <li class="expanded">
+                            <div class="head">
+                                <b>Сватбен ден</b>
+                                <span class="slash">/</span>
+                                <p>
+                                    Професионално заснемане на сватбени тържества, улавящо най-красивите моменти и
+                                    емоции от вашия специален ден
+                                </p>
+                                <span class="toggle">
+                                    <img src="{{ asset('images/home/icons/service-arrow.svg') }}" alt="">
+                                </span>
+                            </div>
+                            <div class="body">
+                                <div class="packages">
+                                    <div class="package">
+                                        <div class="paper">
+                                            <strong>Стандарт</strong>
+                                            <ul>
+                                                <li class="short">8 снимачни часа</li>
+                                                <li>Пълен документален разказ на деня</li>
+                                                <li>600+ кадъра</li>
+                                                <li>Обработка на всички кадри</li>
+                                                <li>Фотосесия на младоженците по <span>време на сватбения ден</span></li>
+                                                <li>Художествена обработка на <span>кадрите от фотосесията</span></li>
+                                                <li>Сет от подбрани снимки до 14 дни <span>след събитието</span></li>
+                                                <li>Дигитална галерия + електронен <span>носител (флаш памет)</span></li>
+                                                <li>До 45 дни срок за получаване</li>
+                                            </ul>
+                                            <b class="price">500 €</b>
+                                        </div>
+                                    </div>
+                                    <div class="package premium">
+                                        <div class="paper">
+                                            <img src="{{ asset('images/home/icons/premium.svg') }}" alt=""
+                                                class="badge">
+                                            <strong>Премиум</strong>
+                                            <ul>
+                                                <li class="short">10 снимачни часа</li>
+                                                <li>Пълен документален разказ на деня</li>
+                                                <li>800+ кадъра</li>
+                                                <li>Обработка на всички кадри</li>
+                                                <li>Фотосесия на младоженците по <span>време на сватбения ден</span></li>
+                                                <li>Художествена обработка на <span>кадрите от фотосесията</span></li>
+                                                <li>Сет от подбрани снимки до 14 дни <span>след събитието</span></li>
+                                                <li>Дигитална галерия + луксозна <span>кутия с електронен носител (флаш
+                                                        памет)</span></li>
+                                                <li>Фотоалбум с 30 избрани фотографии <span>във формат 15х20 см на премиум
+                                                        хартия</span></li>
+                                                <li>До 30 дни срок за получаване</li>
+                                            </ul>
+                                            <b class="price">700 €</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="extras">
+                                    <li>Сватбена фотосесия в различен ден — 150 €</li>
+                                    <li>Овъртайм — 80 €/час</li>
+                                    <li>Експресно изпращане на снимките (за 10 дни) — 200 €</li>
+                                    <li>Изготвяне на индивидуален пакет</li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="head">
+                                <b>Свето Кръщение</b>
+                                <span class="slash">/</span>
+                                <p>
+                                    Професионално заснемане на кръщенета, съхраняващо спомените от този специален
+                                    семеен празник
+                                </p>
+                                <span class="toggle">
+                                    <img src="{{ asset('images/home/icons/service-arrow.svg') }}" alt="">
+                                </span>
+                            </div>
+                            <div class="body">
+                                {{-- TODO: content pending from the client – placeholder uses the previous baptism packages --}}
+                                <div class="packages">
+                                    <div class="package">
+                                        <div class="paper">
+                                            <strong>Ритуал</strong>
+                                            <ul>
+                                                <li class="short">200+ кадъра</li>
+                                                <li>Заснемане на ритуала</li>
+                                                <li>Снимки с гостите</li>
+                                                <li>Обработка на всички кадри</li>
+                                                <li>Сет от подбрани снимки до 7 дни <span>след събитието</span></li>
+                                                <li>Дигитална галерия + електронен <span>носител (флаш памет)</span></li>
+                                                <li>До 14 дни срок за получаване</li>
+                                            </ul>
+                                            <b class="price">200 €</b>
+                                        </div>
+                                    </div>
+                                    <div class="package premium">
+                                        <div class="paper">
+                                            <img src="{{ asset('images/home/icons/premium.svg') }}" alt=""
+                                                class="badge">
+                                            <strong>Разширен</strong>
+                                            <ul>
+                                                <li class="short">4 снимачни часа</li>
+                                                <li>400+ кадъра</li>
+                                                <li>Заснемане на ритуала</li>
+                                                <li>Заснемане на празненство</li>
+                                                <li>Обработка на всички кадри</li>
+                                                <li>Сет от подбрани снимки до 7 дни <span>след събитието</span></li>
+                                                <li>Дигитална галерия + електронен <span>носител (флаш памет)</span></li>
+                                                <li>До 20 дни срок за получаване</li>
+                                            </ul>
+                                            <b class="price">350 €</b>
+                                        </div>
+                                    </div>
+                                </div>
+                                <ul class="extras">
+                                    <li>Овъртайм — 80 €/час</li>
+                                    <li>Експресно изпращане на снимките (за 10 дни) — 200 €</li>
+                                    <li>Луксозен фотоалбум с 30 избрани кадъра 15х20 см — 70 €</li>
+                                    <li>Изготвяне на индивидуален пакет</li>
+                                </ul>
+                            </div>
+                        </li>
+                    </ul>
+                </section>
+                <section id="home-about">
+                    <div class="container">
+                        <div class="text">
+                            <span class="script"><small>3</small>a men</span>
+                            <h2><span class="light">моят</span> <em>почерк</em> <span class="light">във всяка</span>
+                                <em>история</em></h2>
+                            <p>
+                                В работата си се стремя да съчетавам добра композиция, светлина и внимание към
+                                детайла, без да губя усещането за истинския момент. Предпочитам естествените емоции и
+                                спонтанните кадри пред излишно режисираните пози. Всеки повод има своя атмосфера и
+                                характер, затова подхождам индивидуално към всяка история. Целта ми е снимките да
+                                отразяват не само как е изглеждал денят, но и какво го е направило специален. Така
+                                създавам кадри, към които ще можете да се връщате с удоволствие и след години.
+                            </p>
+                        </div>
+                        <div class="picture">
+                            <div class="frame">
+                                <img src="{{ asset('images/home/about/photo.jpg') }}" alt="Борис Борисов – фотограф">
+                            </div>
+                            <img src="{{ asset('images/home/about/signature.png') }}" alt="Борисов" class="signature">
                         </div>
                     </div>
-                </li>
-            </ul>
-        </section>
-    </main>
-    <footer>
-        <div class="wrapper">
-            <svg width="164" height="139" viewBox="0 0 164 139" fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                    d="M60.7709 96.5186C58.8783 96.5186 56.9858 96.5186 54.883 96.5186C52.5699 96.5186 50.0466 96.5186 47.5232 96.5186C35.1167 98.8317 20.6074 100.724 9.88317 101.355C9.67289 101.355 9.46261 101.355 9.25233 101.355C7.14953 101.355 2.38367e-05 100.934 2.38367e-05 99.8831C2.38367e-05 99.4625 1.05142 99.0419 3.3645 98.4111C7.57009 97.57 14.7196 96.9392 18.9252 96.5186C26.0747 95.6775 34.2756 95.2569 42.6868 94.6261C50.6774 93.1541 58.2475 91.2616 65.8176 89.3691C67.0792 87.4766 68.5512 85.584 69.6026 84.1121C67.4998 84.3224 65.6073 84.5327 63.5045 84.5327C49.4157 84.5327 36.3784 77.3831 36.3784 63.2944C36.3784 58.6683 38.0606 54.2524 39.112 51.5187C40.7943 46.472 43.5279 42.4767 48.5746 36.3786C52.9905 30.9113 60.14 23.7618 69.8129 17.2431C83.9016 7.99085 103.247 0.000211311 127.009 0.000211311C127.43 0.000211311 127.64 0.000211311 128.06 0.000211311C145.514 0.210501 163.177 4.41609 163.177 21.4487C163.177 23.7618 162.336 27.5469 162.126 28.5983C161.285 32.5936 159.392 36.1683 156.448 40.7945C153.504 45.4206 149.299 50.6776 143.621 56.1449C134.579 64.5561 121.542 72.757 110.187 77.8037C106.402 79.4859 104.088 80.5373 104.088 80.5373C95.2567 84.3224 79.4857 89.1588 66.6587 92.313C66.2381 92.9438 65.8176 93.5747 65.397 94.2055C69.8129 94.2055 75.2802 94.6261 78.0138 95.2569C80.3269 95.6775 84.953 98.2008 84.953 101.986C84.953 105.35 82.6399 108.084 80.5371 110.397C74.2288 117.967 63.925 126.168 55.9344 131.425C51.5185 134.579 47.1027 136.892 42.4765 138.364C41.8457 138.575 41.2148 138.785 40.7943 138.785C38.9018 138.785 38.2709 137.523 38.2709 135.841C38.2709 134.579 38.6915 132.897 39.3223 131.425C40.1634 129.533 41.2148 127.219 42.6868 124.486C47.1027 116.495 54.883 104.93 60.7709 96.5186ZM37.2195 62.8738C37.2195 76.3317 49.626 82.8504 63.0839 82.8504C65.6073 82.8504 68.3409 82.4299 71.0746 82.0093C74.6493 76.9626 77.8035 72.757 80.1166 69.6028C84.5325 63.5047 91.2614 54.2524 95.2567 47.7337C95.8876 46.6823 96.7287 45.8412 96.7287 45.0001H96.5184C96.5184 44.7898 96.5184 44.7898 96.5184 44.5795C96.5184 43.7384 97.3595 42.8973 98.2006 42.8973C99.4623 42.8973 99.8829 43.5281 99.8829 44.3692C99.8829 46.0515 98.4109 48.5748 97.9904 49.4159C93.7848 55.9346 86.8455 65.1869 82.4297 71.285C80.9577 73.1775 77.1727 78.2243 74.8596 81.3785C80.3269 80.3271 86.8455 78.014 90.4203 76.7523C93.1539 75.9112 101.355 72.757 103.668 71.0747C103.878 70.8645 104.088 70.8645 104.299 70.8645C104.93 70.8645 105.56 71.4953 105.56 72.1261C105.56 73.8084 101.775 74.6495 100.303 75.2803C98.6212 75.9112 91.682 78.4345 91.0511 78.6448C87.0558 80.1168 79.4857 82.4299 73.1774 83.4813C72.126 85.1635 70.8643 86.6354 69.8129 88.3177C81.7988 84.7429 94.2053 80.1168 102.617 76.9626C121.752 69.1822 142.78 55.0935 153.294 38.6917C156.238 34.0655 157.079 31.3319 158.551 27.5469C159.182 25.8646 159.392 23.5515 159.392 21.2385C159.392 18.7151 158.971 16.402 158.13 14.5095C153.504 5.46749 139.626 2.73385 125.537 2.73385C124.906 2.73385 124.275 2.73385 123.644 2.73385C90.21 3.36469 64.5559 19.9768 49.4157 37.2197C44.1588 43.3178 42.4765 47.1029 39.7429 51.729C38.6915 54.0421 37.2195 58.6683 37.2195 62.8738ZM63.0839 93.1541C61.8223 93.5747 60.3503 93.785 59.0886 94.2055C60.14 94.2055 61.4017 94.2055 62.4531 94.2055C62.6634 93.785 62.8737 93.5747 63.0839 93.1541ZM63.5045 96.7289C57.4064 105.14 48.9952 117.126 44.1588 125.327C42.056 128.902 40.584 131.215 39.7429 134.579C38.9018 137.103 39.5326 137.944 42.2662 137.733C46.4718 136.682 51.3083 133.318 55.3036 130.374C62.8737 125.117 72.9671 116.705 79.0652 109.135C80.3269 107.243 82.4297 104.719 82.4297 102.406C82.4297 101.145 81.7988 100.093 80.1166 99.2522C78.6446 98.4111 77.1727 98.2008 77.1727 98.2008C74.0185 97.3597 68.7615 96.7289 63.5045 96.7289ZM30.4906 97.1494C26.0747 97.3597 22.0794 97.57 19.1355 97.7803C14.7196 98.2008 6.93925 98.8317 2.94394 99.8831C3.57478 100.093 4.20562 100.093 4.83646 100.093C6.72897 100.093 8.83177 99.8831 9.67289 99.8831C14.9299 99.4625 21.4486 98.6214 30.4906 97.1494ZM99.4327 95.4672C100.274 94.2055 103.849 90.4205 106.372 90.4205C107.423 90.4205 108.264 91.0513 108.895 92.5233C109.106 92.9438 109.316 93.785 109.316 94.4158C109.316 97.1494 107.213 100.093 106.162 101.565C103.638 104.93 99.0122 109.766 93.9655 110.187C93.5449 110.187 93.3346 110.187 93.1244 110.187C91.0216 110.187 90.1804 109.135 90.1804 107.453C90.1804 102.827 96.2786 93.785 97.3299 92.5233C104.69 81.799 115.204 68.972 125.087 58.6683C128.031 55.3038 130.134 52.3599 133.498 50.4673C135.811 49.2057 136.021 51.729 135.18 53.201C132.236 58.0374 128.241 62.6636 124.246 67.2897C116.886 75.7009 107.003 86.4252 100.484 93.9952C100.064 94.4158 99.8533 94.8364 99.4327 95.4672ZM105.741 86.4252C114.363 76.9626 124.877 65.8178 132.026 54.8832C123.405 63.715 112.891 77.1729 105.741 86.4252ZM103.008 99.2522C103.428 98.4111 105.741 95.0466 105.741 93.5747C105.741 93.1541 105.531 92.7336 105.11 92.7336C104.69 92.7336 104.269 92.9438 103.849 93.1541C99.0122 95.0466 95.0169 100.934 93.1244 105.771C92.9141 106.402 92.9141 106.612 92.9141 107.243C92.9141 107.453 92.9141 107.663 93.3346 107.663C94.386 107.663 97.7505 105.35 98.1711 104.93C99.8533 103.458 101.746 100.934 103.008 99.2522Z"
-                    fill="#DBC2A3" />
-            </svg>
-            <b>
-                ЗАПАЗИ
-            </b>
-            <p>
-                своя снимачен ден
-            </p>
-            <ul>
-                <li>
-                    <a href="tel:+359883375611" title="Обадете се">
-                        +359 883 375 611
-                    </a>
-                </li>
-                <li>
-                    <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">
-                        photography.borisov@gmail.com
-                    </a>
-                </li>
-            </ul>
-            <h2>БОРИС БОРИСОВ</h2>
-            <div class="bottom">
-                <div class="left">
-                    <strong>© {{ date('Y') }} Борис Борисов</strong>. Всички права запазени.
+                </section>
+                <section id="home-reviews" aria-label="Отзиви от клиенти">
+                    <div class="track">
+                        <ul>
+                            <li>
+                                <div class="stars">
+                                    @foreach (range(1, 5) as $i)
+                                        <img src="{{ asset('images/home/icons/star.svg') }}" alt="">
+                                    @endforeach
+                                </div>
+                                <p>
+                                    Изключително съм доволен от професионалната фотосесия за нашата сватба! Фотографът беше
+                                    невероятен професионалист – внимателен към всеки детайл, с усет към емоциите и
+                                    атмосферата на деня. Успя да улови най-красивите и искрени моменти по естествен и
+                                    артистичен начин. Комуникацията беше лесна и приятна, а крайният резултат надмина
+                                    очакванията ни. Силно препоръчвам на всеки, който иска спомените от сватбата му да бъдат
+                                    запазени по перфектен начин!
+                                </p>
+                                <span class="name">Илиян Алински</span>
+                            </li>
+                            <li>
+                                <div class="stars">
+                                    @foreach (range(1, 5) as $i)
+                                        <img src="{{ asset('images/home/icons/star.svg') }}" alt="">
+                                    @endforeach
+                                </div>
+                                <p>
+                                    Изключително доволни сме от работата! Снимките станаха прекрасни - естествени,
+                                    емоционални и с внимание към всеки детайл. Фотографът беше много позитивен, предразположи
+                                    ни и успя да улови най-красивите моменти. Препоръчваме с две ръце!
+                                </p>
+                                <span class="name">Анна-Мария Димитрова</span>
+                            </li>
+                            <li>
+                                <div class="stars">
+                                    @foreach (range(1, 5) as $i)
+                                        <img src="{{ asset('images/home/icons/star.svg') }}" alt="">
+                                    @endforeach
+                                </div>
+                                <p>
+                                    Много сме доволни от резултатите! Всяка снимка се получи уникална, атмосферна и
+                                    красива. Преди фотосесията фотографът уточни всеки детайл, включително какво искаме за
+                                    снимките и какъв стил искаме. Специални благодарности за търпението, вниманието към
+                                    детайлите и способността да създадете комфортна атмосфера. Беше удоволствие да работим с
+                                    вас. Определено ще се свържем с вас отново и ще ви препоръчаме на нашите приятели!
+                                </p>
+                                <span class="name">Катя Волохова</span>
+                            </li>
+                        </ul>
+                    </div>
+                
+                </section>
+            </main>
+            <footer>
+                <div class="wrapper">
+                    <img src="{{ asset('images/app/footer-bb.svg') }}" alt="Boris Borisov" class="bb">
+                    <b>ЗАПАЗИ</b>
+                    <p>своя снимачен ден</p>
+                    <img src="{{ asset('images/home/icons/line-footer.svg') }}" alt="" class="line">
+                    <ul class="contacts">
+                        <li>
+                            <a href="tel:+359883375611" title="Обадете се" class="phone">
+                                +359 883 375 611
+                            </a>
+                        </li>
+                        <li>
+                            <a href="mailto:photography.borisov@gmail.com" title="Изпратете имейл">
+                                photography.borisov@gmail.com
+                            </a>
+                        </li>
+                    </ul>
+                    <ul class="seals">
+                        <li>
+                            <img src="{{ asset('images/home/icons/seal-signature.svg') }}" alt="">
+                            <span>авторски<br />стил</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/home/icons/seal-ribbon.svg') }}" alt="">
+                            <span>коректно<br />отразяване</span>
+                        </li>
+                        <li>
+                            <img src="{{ asset('images/home/icons/seal-camera.svg') }}" alt="">
+                            <span>персонален<br />подход</span>
+                        </li>
+                    </ul>
+                    <h2><span>БОРИС</span><span>БОРИСОВ</span></h2>
+                    <div class="bottom">
+                        <div class="left">
+                            <span>Авторски права</span>
+                        </div>
+                        <div class="right">
+                            © {{ date('Y') }} Борис Борисов
+                        </div>
+                    </div>
                 </div>
-                <div class="right">
-                    <span>
-                        Авторски права
-                    </span>
-                </div>
-            </div>
-        </div>
-    </footer>
-    <div class="services-popup-overlay" id="services-popup-overlay">
-        <div class="services-popup">
-            <div class="services-popup-header">
-                <h3 id="services-popup-title">Допълнителни услуги</h3>
-                <div class="services-popup-close">
-                    <span></span>
-                    <span></span>
-                </div>
-            </div>
-            <div class="services-popup-body">
-                <ul id="services-popup-list"></ul>
-            </div>
+            </footer>
         </div>
     </div>
     <div class="services-popup-overlay" id="author-rights-popup-overlay">
@@ -768,752 +573,565 @@
         </div>
     </div>
     <script>
-        gsap.registerPlugin(ScrollTrigger);
+        gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
-        // Detect iOS Safari
-        function isIOSSafari() {
-            const ua = navigator.userAgent;
-            return /iPad|iPhone|iPod/.test(ua) && /Safari/.test(ua) && !/Chrome/.test(ua);
+        var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+        // === Smooth scrolling ===
+        var smoother = ScrollSmoother.create({
+            wrapper: '#smooth-wrapper',
+            content: '#smooth-content',
+            smooth: prefersReducedMotion ? 0 : 1.2,
+            smoothTouch: false,
+            effects: true
+        });
+
+        function lockScroll() {
+            smoother.paused(true);
         }
 
+        function unlockScroll() {
+            smoother.paused(false);
+        }
+
+        // Wraps every character of the element's text nodes in a span, keeping the inner markup (em, span, br...)
         function splitTextToChars(element) {
-            const text = element.innerHTML;
-            let chars = '';
-            let tempDiv = document.createElement('div');
-            tempDiv.innerHTML = text;
+            var walker = document.createTreeWalker(element, NodeFilter.SHOW_TEXT);
+            var textNodes = [];
+            while (walker.nextNode()) {
+                textNodes.push(walker.currentNode);
+            }
 
-            const processNode = (node) => {
-                if (node.nodeType === Node.TEXT_NODE) {
-                    return node.textContent.split('').map(char => {
-                        if (char === '\n' || char === '\r' || char === '\t') {
-                            return '';
-                        }
-                        if (char === ' ') {
-                            return `<span class="char" style="display: inline-block; padding: 0 0.15em;"></span>`;
-                        }
-                        return `<span class="char" style="display: inline-block; opacity: 0;">${char}</span>`;
-                    }).join('');
-                } else if (node.nodeType === Node.ELEMENT_NODE) {
-                    if (node.nodeName.toLowerCase() === 'br') {
-                        return '<br>';
-                    }
-                    let inner = '';
-                    node.childNodes.forEach(child => {
-                        inner += processNode(child);
-                    });
-                    return `<${node.nodeName.toLowerCase()}>${inner}</${node.nodeName.toLowerCase()}>`;
+            textNodes.forEach(function(node) {
+                var text = node.textContent.replace(/\s+/g, ' ');
+                if (!text.trim()) {
+                    return;
                 }
-                return '';
-            };
-
-            tempDiv.childNodes.forEach(child => {
-                chars += processNode(child);
+                var fragment = document.createDocumentFragment();
+                text.split(/(\s)/).forEach(function(part) {
+                    if (!part) return;
+                    if (part === ' ') {
+                        fragment.appendChild(document.createTextNode(' '));
+                        return;
+                    }
+                    // Keep words together so lines never break inside a word
+                    var word = document.createElement('span');
+                    word.className = 'word';
+                    part.split('').forEach(function(char) {
+                        var span = document.createElement('span');
+                        span.className = 'char';
+                        span.textContent = char;
+                        word.appendChild(span);
+                    });
+                    fragment.appendChild(word);
+                });
+                node.parentNode.replaceChild(fragment, node);
             });
-
-            chars = chars.replace(/(<br>\s*)+/g, '<br>');
-            element.innerHTML = chars;
 
             return element.querySelectorAll('.char');
         }
 
-        function animateChars(charElements, duration, onComplete) {
-            const stagger = duration / charElements.length;
-
-            return gsap.fromTo(charElements, {
+        // One reusable timeline per text: entering plays it, leaving back rewinds the same timeline
+        // (faster, so the reset is quick but still smooth). It is never recreated, so re-entering
+        // mid-animation simply continues from where it is – no stacked/doubled tweens.
+        function createCharsReveal(charElements, duration, delay) {
+            return gsap.timeline({
+                paused: true
+            }).fromTo(charElements, {
                 opacity: 0,
                 y: 20
             }, {
                 opacity: 1,
                 y: 0,
                 duration: 0.3,
-                stagger: stagger,
-                ease: "power2.out",
-                onComplete: onComplete || null
-            });
+                stagger: duration / charElements.length,
+                ease: 'power2.out',
+                immediateRender: true
+            }, delay || 0);
         }
 
-        // === Presets (run immediately, before loading overlay hides) ===
+        // === Presets (run immediately, before the loading overlay hides) ===
 
-        var heroUl = document.querySelector('#home-hero ul');
-        var heroListItems = heroUl.querySelectorAll('li');
+        var heroTitleLines = document.querySelectorAll('#home-hero h1 > *');
+        var heroListItems = document.querySelectorAll('#home-hero ul li');
+        gsap.set(heroTitleLines, {
+            opacity: 0,
+            y: 40
+        });
+        gsap.set(heroListItems, {
+            opacity: 0
+        });
 
-        // On iOS Safari, make hero list items visible immediately
-        if (isIOSSafari()) {
-            gsap.set(heroListItems, {
-                opacity: 0
-            });
-        } else {
-            gsap.set(heroListItems, {
-                opacity: 0
-            });
-        }
-
-        var h1 = document.querySelector('#home-hero h1');
-        var h1Chars = splitTextToChars(h1);
-
+        // Section titles and the quote reveal letter by letter
         var h2Data = [];
-        document.querySelectorAll('main section h2').forEach(function(h2) {
-            var section = h2.closest('section');
-            var chars = splitTextToChars(h2);
+        document.querySelectorAll('main section h2, #home-quote p').forEach(function(el) {
+            var isQuote = !!el.closest('#home-quote');
             h2Data.push({
-                section: section,
-                chars: chars
+                trigger: isQuote ? '#home-quote' : el,
+                start: isQuote ? 'top 55%' : 'top 85%',
+                duration: isQuote ? 1.8 : 1,
+                delay: isQuote && el.previousElementSibling ? 1.6 : 0,
+                chars: splitTextToChars(el)
             });
         });
-
-        // Professional section text parallax opacity
-        var professionalSection = document.querySelector('#home-professional');
-        var professionalText = professionalSection.querySelector('p');
-        gsap.set(professionalText, {
-            opacity: 0,
-            y: 30
+        h2Data.forEach(function(data) {
+            data.reveal = createCharsReveal(data.chars, data.duration, data.delay);
         });
 
-        gsap.to(professionalText, {
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: professionalText,
-                start: 'top 90%',
-                end: 'top 40%',
-                scrub: true
-            }
-        });
+        // === Endless loops (marquee bar + reviews) ===
+        // Clones the list until it covers the viewport twice and moves it with the GSAP ticker.
+        //  - followScroll: direction follows the scroll, speed grows with scroll velocity and the track leans (skew)
+        //  - hoverSpeed: speed factor while hovered/touched (0 = stops), eased in and out for a soft feel
+        function createLoop(section, options) {
+            var track = section.querySelector('.track');
+            var source = track.querySelector('ul');
+            var groupWidth = 0;
+            var x = options.startX || 0;
+            var direction = 1;
+            var baseSpeed = prefersReducedMotion ? options.speed * 0.25 : options.speed; // px per second
+            var boost = 0;
+            var hoverFactor = 1;
+            var hoverTarget = 1;
+            var skewSetter = gsap.quickSetter(track, 'skewX', 'deg');
+            var xSetter = gsap.quickSetter(track, 'x', 'px');
+            var isVisible = true;
 
-        // Animate professional author image and icons with scroll-based opacity
-        var professionalAuthorImg = document.querySelector('#home-professional .author > img');
-        var professionalAuthorIcons = document.querySelectorAll('#home-professional .author ul li');
-
-        gsap.set(professionalAuthorImg, {
-            opacity: 0,
-            y: 30
-        });
-        gsap.set(professionalAuthorIcons, {
-            opacity: 0,
-            y: 30
-        });
-
-        gsap.to(professionalAuthorImg, {
-            opacity: 1,
-            y: 0,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: professionalAuthorImg,
-                start: 'top 80%',
-                end: 'top 40%',
-                scrub: true
-            }
-        });
-
-        gsap.to(professionalAuthorIcons, {
-            opacity: 1,
-            y: 0,
-            stagger: 0.15,
-            ease: "power2.out",
-            scrollTrigger: {
-                trigger: professionalAuthorImg,
-                start: 'top 75%',
-                end: 'top 35%',
-                scrub: true
-            }
-        });
-
-        var frameTop = document.querySelector('#home-frame .picture');
-        gsap.set(frameTop, {
-            opacity: 0,
-            y: -50
-        });
-
-        var galleryItems = document.querySelectorAll('#home-gallery .row ul.col li');
-        galleryItems.forEach(function(item) {
-            gsap.set(item, {
-                opacity: 0,
-                y: 40
-            });
-        });
-
-        var footerSvgPath = document.querySelector('footer svg path');
-        if (footerSvgPath) {
-            var footerPathLength = footerSvgPath.getTotalLength();
-            footerSvgPath.style.stroke = '#DBC2A3';
-            footerSvgPath.style.strokeWidth = '1.5';
-            footerSvgPath.style.fill = 'transparent';
-            footerSvgPath.style.strokeDasharray = footerPathLength;
-            footerSvgPath.style.strokeDashoffset = footerPathLength;
-        }
-
-        // Menu overlay setup (event listeners + SVG preset)
-        var menuBtn = document.querySelector('header .menu');
-        var menuOverlay = document.querySelector('header .menu-overlay');
-        var closeMenuBtn = document.querySelector('header .close-menu');
-        var menuLinks = document.querySelectorAll('header .menu-overlay .main ul li a');
-
-        var menuSvgPath = document.querySelector('header .menu-overlay .footer svg path');
-        var menuSvgTl = null;
-
-        if (menuSvgPath) {
-            var menuPathLength = menuSvgPath.getTotalLength();
-            menuSvgPath.style.stroke = '#DBC2A3';
-            menuSvgPath.style.strokeWidth = '1.5';
-            menuSvgPath.style.fill = 'transparent';
-            menuSvgPath.style.strokeDasharray = menuPathLength;
-            menuSvgPath.style.strokeDashoffset = menuPathLength;
-
-            menuSvgTl = gsap.timeline({
-                paused: true
-            });
-            menuSvgTl.to(menuSvgPath, {
-                strokeDashoffset: 0,
-                fill: '#DBC2A3',
-                strokeWidth: 0,
-                duration: 3,
-                ease: "power1.inOut"
-            });
-        }
-
-        var menuItems = document.querySelectorAll('header .menu-overlay .main ul li');
-
-        menuBtn.addEventListener('click', function() {
-            menuOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            if (menuSvgTl) {
-                menuSvgTl.timeScale(1);
-                menuSvgTl.restart();
+            function build() {
+                track.querySelectorAll('ul[aria-hidden]').forEach(function(clone) {
+                    clone.remove();
+                });
+                groupWidth = source.offsetWidth;
+                var copies = Math.max(1, Math.ceil((window.innerWidth * 2) / groupWidth));
+                for (var i = 0; i < copies; i++) {
+                    var clone = source.cloneNode(true);
+                    clone.setAttribute('aria-hidden', 'true');
+                    track.appendChild(clone);
+                }
+                x = gsap.utils.wrap(-groupWidth, 0, x);
             }
 
-            gsap.set(menuItems, {
-                opacity: 0,
-                y: 30
-            });
-            gsap.to(menuItems, {
-                opacity: 1,
-                y: 0,
-                duration: 0.5,
-                stagger: 0.12,
-                ease: "power3.out",
-                delay: 0.15
-            });
-        });
+            build();
 
-        closeMenuBtn.addEventListener('click', function() {
-            gsap.to(menuItems, {
-                opacity: 0,
-                y: -15,
-                duration: 0.25,
-                stagger: 0.05,
-                ease: "power2.in",
-                onComplete: function() {
-                    menuOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
+            var lastWidth = window.innerWidth;
+            var resizeTimer;
+            window.addEventListener('resize', function() {
+                if (window.innerWidth === lastWidth) return; // ignore mobile URL-bar height changes
+                lastWidth = window.innerWidth;
+                clearTimeout(resizeTimer);
+                resizeTimer = setTimeout(build, 150);
+            });
+
+            function hold() {
+                hoverTarget = options.hoverSpeed;
+            }
+
+            function release() {
+                hoverTarget = 1;
+            }
+            track.addEventListener('mouseenter', hold);
+            track.addEventListener('mouseleave', release);
+            track.addEventListener('touchstart', hold, {
+                passive: true
+            });
+            track.addEventListener('touchend', function() {
+                setTimeout(release, 1200);
+            });
+
+            ScrollTrigger.create({
+                trigger: section,
+                start: 'top bottom',
+                end: 'bottom top',
+                onToggle: function(self) {
+                    isVisible = self.isActive;
                 }
             });
-            if (menuSvgTl) {
-                menuSvgTl.timeScale(4);
-                menuSvgTl.reverse();
-            }
+
+            gsap.ticker.add(function(time, deltaTime) {
+                if (!isVisible || !groupWidth) return;
+
+                var velocity = options.followScroll ? smoother.getVelocity() : 0;
+                if (options.followScroll && Math.abs(velocity) > 5) {
+                    direction = velocity > 0 ? 1 : -1;
+                }
+                var targetBoost = prefersReducedMotion ? 0 : Math.min(Math.abs(velocity) / 300, 8);
+                boost += (targetBoost - boost) * 0.08;
+                hoverFactor += (hoverTarget - hoverFactor) * 0.05;
+
+                var dt = Math.min(deltaTime, 50) / 1000;
+                x -= direction * baseSpeed * (1 + boost) * hoverFactor * dt;
+                x = gsap.utils.wrap(-groupWidth, 0, x);
+                xSetter(x);
+
+                if (options.followScroll && !prefersReducedMotion) {
+                    skewSetter(gsap.utils.clamp(-8, 8, -velocity / 400) * (boost > 0.05 ? 1 : 0));
+                }
+            });
+        }
+
+        createLoop(document.querySelector('#home-marquee'), {
+            speed: 60,
+            startX: -17,
+            followScroll: true,
+            hoverSpeed: 0.25
+        });
+
+        createLoop(document.querySelector('#home-reviews'), {
+            speed: 45,
+            startX: -10,
+            followScroll: false,
+            hoverSpeed: 0
+        });
+
+        // === The hero stays put while the page slides over it ===
+        function heroPin(extra) {
+            return Object.assign({
+                trigger: '#home-hero',
+                start: 'top top',
+                end: 'bottom top',
+                pinSpacing: false
+            }, extra);
+        }
+        // The hero slowly recedes under the incoming content (driven by the same pin trigger,
+        // a separate trigger would be offset by the pin's duration)
+        var heroRecede = gsap.timeline({
+                paused: true
+            })
+            .to('#home-hero > *', {
+                scale: 0.92,
+                opacity: 0.25,
+                ease: 'none'
+            }, 0)
+            .to('header', {
+                autoAlpha: 0, // also hidden for clicks once faded out
+                ease: 'none'
+            }, 0);
+
+        ScrollTrigger.create(heroPin({
+            pin: '#home-hero',
+            scrub: true,
+            animation: prefersReducedMotion ? null : heroRecede
+        }));
+        ScrollTrigger.create(heroPin({
+            pin: 'header'
+        }));
+
+        // === Services accordion ===
+        document.querySelectorAll('#home-services ul.services > li').forEach(function(item) {
+            var head = item.querySelector('.head');
+            var body = item.querySelector('.body');
+
+            head.addEventListener('click', function() {
+                var isExpanded = item.classList.contains('expanded');
+
+                if (isExpanded) {
+                    gsap.fromTo(body, {
+                        height: body.offsetHeight
+                    }, {
+                        height: 0,
+                        duration: 0.6,
+                        ease: 'power3.inOut',
+                        onComplete: function() {
+                            item.classList.remove('expanded');
+                            gsap.set(body, {
+                                clearProps: 'height'
+                            });
+                            ScrollTrigger.refresh();
+                        }
+                    });
+                    return;
+                }
+
+                item.classList.add('expanded');
+                var packages = body.querySelectorAll('.package');
+                var extras = body.querySelectorAll('.extras li');
+
+                gsap.timeline({
+                        onComplete: function() {
+                            ScrollTrigger.refresh();
+                        }
+                    })
+                    .from(body, {
+                        height: 0,
+                        duration: 0.7,
+                        ease: 'power3.out',
+                        clearProps: 'height'
+                    })
+                    .fromTo(packages, {
+                        opacity: 0,
+                        y: 40,
+                        rotateX: -8,
+                        transformPerspective: 1200
+                    }, {
+                        opacity: 1,
+                        y: 0,
+                        rotateX: 0,
+                        transformPerspective: 1200,
+                        duration: 0.7,
+                        stagger: 0.15,
+                        ease: 'power2.out',
+                        clearProps: 'transform,opacity'
+                    }, '-=0.45')
+                    .from(extras, {
+                        opacity: 0,
+                        y: 12,
+                        duration: 0.4,
+                        stagger: 0.06,
+                        ease: 'power2.out',
+                        clearProps: 'transform,opacity'
+                    }, '-=0.35');
+            });
+        });
+
+        // === Menu overlay ===
+        var menuBtn = document.querySelector('header .menu');
+        var menuOverlay = document.querySelector('.menu-overlay');
+        var closeMenuBtn = document.querySelector('.menu-overlay .close-menu');
+        var menuLinks = document.querySelectorAll('.menu-overlay .main ul li a');
+        var menuItems = document.querySelectorAll('.menu-overlay .main ul li');
+        var menuFooterItems = document.querySelectorAll('.menu-overlay .footer > *');
+        var menuIsOpen = false;
+
+        function openMenu() {
+            if (menuIsOpen) return;
+            menuIsOpen = true;
+            menuOverlay.classList.add('active');
+            menuOverlay.setAttribute('aria-hidden', 'false');
+            lockScroll();
+            gsap.timeline()
+                .fromTo(menuItems, {
+                    opacity: 0,
+                    y: 40
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.8,
+                    stagger: 0.09,
+                    ease: 'power3.out',
+                    delay: 0.15
+                })
+                .fromTo(menuFooterItems, {
+                    opacity: 0,
+                    y: 20
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    duration: 0.7,
+                    stagger: 0.05,
+                    ease: 'power2.out'
+                }, '-=0.6');
+        }
+
+        function closeMenu(onClosed) {
+            if (!menuIsOpen) return;
+            menuIsOpen = false;
+            gsap.to([menuItems, menuFooterItems], {
+                opacity: 0,
+                y: -15,
+                duration: 0.3,
+                stagger: 0.02,
+                ease: 'power2.in',
+                onComplete: function() {
+                    menuOverlay.classList.remove('active');
+                    menuOverlay.setAttribute('aria-hidden', 'true');
+                    unlockScroll();
+                    if (onClosed) onClosed();
+                }
+            });
+        }
+
+        menuBtn.addEventListener('click', openMenu);
+        closeMenuBtn.addEventListener('click', function() {
+            closeMenu();
+        });
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') closeMenu();
         });
 
         menuLinks.forEach(function(link) {
-            link.addEventListener('click', function() {
-                gsap.to(menuItems, {
-                    opacity: 0,
-                    y: -15,
-                    duration: 0.25,
-                    stagger: 0.05,
-                    ease: "power2.in",
-                    onComplete: function() {
-                        menuOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
+            link.addEventListener('click', function(e) {
+                e.preventDefault();
+                var target = document.querySelector(link.getAttribute('href'));
+                closeMenu(function() {
+                    if (target) smoother.scrollTo(target, true, 'top top');
                 });
-                if (menuSvgTl) {
-                    menuSvgTl.timeScale(4);
-                    menuSvgTl.reverse();
-                }
             });
         });
 
-        // Services accordion (no animation, just click handler)
-        document.querySelectorAll('#home-services ul.services li .container > b').forEach(function(bElem) {
-            bElem.addEventListener('click', function(e) {
-                e.stopPropagation();
-                var self = bElem.closest('li');
-                if (self.classList.contains('expanded')) return;
+        // === Author rights popup ===
+        var authorRightsPopupOverlay = document.getElementById('author-rights-popup-overlay');
+        var authorRightsPopupClose = document.getElementById('author-rights-popup-close');
+        var authorRightsPopup = authorRightsPopupOverlay.querySelector('.services-popup');
 
-                var expandedItem = document.querySelector('#home-services ul.services li.expanded');
-                var isBase = self.classList.contains('base');
-                var body = self.querySelector('.body');
-
-                if (expandedItem) {
-                    var oldBody = expandedItem.querySelector('.body');
-                    // Collapse old item
-                    gsap.to(oldBody, {
-                        height: 0,
-                        opacity: 0,
-                        duration: 0.4,
-                        ease: "power2.inOut",
-                        onComplete: function() {
-                            expandedItem.classList.remove('expanded');
-                            oldBody.style.height = '';
-                            oldBody.style.opacity = '';
-                            expandNewItem();
-                        }
-                    });
-                } else {
-                    expandNewItem();
-                }
-
-                function expandNewItem() {
-                    self.classList.add('expanded');
-
-                    if (isBase) {
-                        // BASE animation: elastic flip-in with staggered reveal
-                        var cards = body.querySelectorAll(':scope > ul > li');
-                        gsap.set(body, {
-                            height: 'auto',
-                            opacity: 1
-                        });
-                        var fullHeight = body.offsetHeight;
-                        gsap.set(body, {
-                            height: 0,
-                            opacity: 0
-                        });
-
-                        var tl = gsap.timeline();
-
-                        // Expand the body container
-                        tl.to(body, {
-                            height: fullHeight,
-                            opacity: 1,
-                            duration: 0.6,
-                            ease: "power2.out",
-                            onComplete: function() {
-                                body.style.height = 'auto';
-                            }
-                        });
-
-                        if (cards.length) {
-                            gsap.set(cards, {
-                                opacity: 0,
-                                y: 30
-                            });
-
-                            tl.to(cards, {
-                                opacity: 1,
-                                y: 0,
-                                duration: 0.7,
-                                stagger: 0.15,
-                                ease: "power2.out"
-                            }, "-=0.3");
-
-                            cards.forEach(function(card, cardIndex) {
-                                var innerItems = card.querySelectorAll('ul.main li');
-                                if (innerItems.length) {
-                                    gsap.fromTo(innerItems, {
-                                        opacity: 0,
-                                        y: 12
-                                    }, {
-                                        opacity: 1,
-                                        y: 0,
-                                        duration: 0.4,
-                                        stagger: 0.05,
-                                        ease: "power2.out",
-                                        delay: 0.4 + cardIndex * 0.2
-                                    });
-                                }
-                                var footer = card.querySelector('.footer');
-                                if (footer) {
-                                    gsap.fromTo(footer, {
-                                        opacity: 0,
-                                        y: 10
-                                    }, {
-                                        opacity: 1,
-                                        y: 0,
-                                        duration: 0.5,
-                                        ease: "power2.out",
-                                        delay: 0.7 + cardIndex * 0.2
-                                    });
-                                }
-                            });
-                        }
-                    } else {
-                        // NON-BASE animation: curtain reveal + content fade cascade
-                        gsap.set(body, {
-                            height: 'auto',
-                            opacity: 1
-                        });
-                        var fullHeight = body.offsetHeight;
-                        gsap.set(body, {
-                            height: 0,
-                            opacity: 1,
-                            overflow: 'hidden'
-                        });
-
-                        var contentElements = body.querySelectorAll(
-                            ':scope > p, :scope > ul > li, :scope > span.link');
-                        gsap.set(contentElements, {
-                            opacity: 0,
-                            y: 30,
-                            filter: 'blur(4px)'
-                        });
-
-                        var tl = gsap.timeline();
-
-                        tl.to(body, {
-                            height: fullHeight,
-                            duration: 0.6,
-                            ease: "power4.out",
-                            onComplete: function() {
-                                body.style.height = 'auto';
-                                body.style.overflow = '';
-                            }
-                        });
-
-                        tl.to(contentElements, {
-                            opacity: 1,
-                            y: 0,
-                            filter: 'blur(0px)',
-                            duration: 0.4,
-                            stagger: 0.08,
-                            ease: "power2.out"
-                        }, "-=0.25");
-                    }
-                }
-            });
-        });
-
-        // Services popup
-        var popupOverlay = document.getElementById('services-popup-overlay');
-        var popupTitle = document.getElementById('services-popup-title');
-        var popupList = document.getElementById('services-popup-list');
-        var popupClose = document.querySelector('.services-popup-close');
-        var popup = document.querySelector('.services-popup');
-
-        var weddingExtras = [
-            'Сватбена фотосесия в различен ден — <strong>150€</strong>',
-            'Овъртайм — <strong>80€/час</strong>',
-            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
-            'Изготвяне на индивидуален пакет'
-        ];
-
-        var otherExtras = [
-            'Овъртайм — <strong>80€/час</strong>',
-            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
-            'Изготвяне на индивидуален пакет'
-        ];
-
-        var baptismExtras = [
-            'Овъртайм — <strong>80€/час</strong>',
-            'Експресно изпращане на снимките (за 10 дни) — <strong>200€</strong>',
-            'Луксозен Фотоалбум с 30 избрани кадри във формат 15х20 на премиум хартия — <strong>70€</strong>',
-            'Изготвяне на индивидуален пакет'
-        ];
-
-        function openServicesPopup(isWedding, isBaptism) {
-            var items = isWedding ? weddingExtras : isBaptism ? baptismExtras : otherExtras;
-            popupTitle.textContent = 'Допълнителни услуги';
-            popupList.innerHTML = items.map(function(item) {
-                return '<li>' + item + '</li>';
-            }).join('');
-
-            popupOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-
-            var listItems = popupList.querySelectorAll('li');
-            gsap.set(popup, {
+        function openAuthorRightsPopup() {
+            authorRightsPopupOverlay.classList.add('active');
+            lockScroll();
+            gsap.fromTo(authorRightsPopup, {
                 opacity: 0,
                 y: 40
-            });
-            gsap.set(listItems, {
-                opacity: 0,
-                y: 20
-            });
-
-            gsap.to(popup, {
+            }, {
                 opacity: 1,
                 y: 0,
                 duration: 0.5,
-                ease: "power2.out"
+                ease: 'power2.out'
             });
-
-            gsap.to(listItems, {
-                opacity: 1,
-                y: 0,
-                duration: 0.4,
-                stagger: 0.08,
-                ease: "power2.out",
-                delay: 0.25
-            });
-        }
-
-        function closeServicesPopup() {
-            gsap.to(popup, {
-                opacity: 0,
-                y: 30,
-                duration: 0.3,
-                ease: "power2.in",
-                onComplete: function() {
-                    popupOverlay.classList.remove('active');
-                    document.body.style.overflow = '';
-                }
-            });
-        }
-
-        popupClose.addEventListener('click', function(e) {
-            e.stopPropagation();
-            closeServicesPopup();
-        });
-        // Author rights popup logic
-        var authorRightsPopupOverlay = document.getElementById('author-rights-popup-overlay');
-        var authorRightsPopupClose = document.getElementById('author-rights-popup-close');
-        var authorRightsPopup = authorRightsPopupOverlay ? authorRightsPopupOverlay.querySelector('.services-popup') : null;
-
-        function openAuthorRightsPopup() {
-            if (!authorRightsPopupOverlay) return;
-            authorRightsPopupOverlay.classList.add('active');
-            document.body.style.overflow = 'hidden';
-            if (authorRightsPopup) {
-                gsap.set(authorRightsPopup, {
-                    opacity: 0,
-                    y: 40
-                });
-                gsap.to(authorRightsPopup, {
-                    opacity: 1,
-                    y: 0,
-                    duration: 0.5,
-                    ease: "power2.out"
-                });
-            }
         }
 
         function closeAuthorRightsPopup() {
-            if (!authorRightsPopupOverlay) return;
-            if (authorRightsPopup) {
-                gsap.to(authorRightsPopup, {
-                    opacity: 0,
-                    y: 30,
-                    duration: 0.3,
-                    ease: "power2.in",
-                    onComplete: function() {
-                        authorRightsPopupOverlay.classList.remove('active');
-                        document.body.style.overflow = '';
-                    }
-                });
-            } else {
-                authorRightsPopupOverlay.classList.remove('active');
-                document.body.style.overflow = '';
-            }
-        }
-
-        if (authorRightsPopupClose) {
-            authorRightsPopupClose.addEventListener('click', function(e) {
-                e.stopPropagation();
-                closeAuthorRightsPopup();
-            });
-        }
-        if (authorRightsPopupOverlay) {
-            authorRightsPopupOverlay.addEventListener('click', function(e) {
-                if (e.target === authorRightsPopupOverlay) {
-                    closeAuthorRightsPopup();
+            gsap.to(authorRightsPopup, {
+                opacity: 0,
+                y: 30,
+                duration: 0.3,
+                ease: 'power2.in',
+                onComplete: function() {
+                    authorRightsPopupOverlay.classList.remove('active');
+                    unlockScroll();
                 }
             });
         }
 
-        // Footer author rights trigger
-        var authorRightsTrigger = document.querySelector('footer .wrapper .bottom .right span');
-        if (authorRightsTrigger) {
-            authorRightsTrigger.style.cursor = 'pointer';
-            authorRightsTrigger.addEventListener('click', function(e) {
-                e.preventDefault();
-                openAuthorRightsPopup();
-            });
-        }
-
-        popupOverlay.addEventListener('click', function(e) {
-            if (e.target === popupOverlay) {
-                closeServicesPopup();
+        authorRightsPopupClose.addEventListener('click', function(e) {
+            e.stopPropagation();
+            closeAuthorRightsPopup();
+        });
+        authorRightsPopupOverlay.addEventListener('click', function(e) {
+            if (e.target === authorRightsPopupOverlay) {
+                closeAuthorRightsPopup();
             }
         });
+        document.querySelector('footer .bottom .left span').addEventListener('click', openAuthorRightsPopup);
 
-        document.querySelectorAll('#home-services ul.services > li span.link').forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                e.stopPropagation();
-                var serviceItem = this.closest('#home-services ul.services > li');
-                var isWedding = serviceItem.querySelector('b') &&
-                    serviceItem.querySelector('b').textContent.trim() === 'Сватбен ден';
-                var isBaptism = serviceItem.querySelector('b') &&
-                    serviceItem.querySelector('b').textContent.trim() === 'Свето Кръщение';
-                openServicesPopup(isWedding, isBaptism);
-            });
-        });
-
-        // === Animation triggers (run after loading overlay hides) ===
+        // === Animation triggers (run after the loading overlay hides) ===
 
         function initAnimations() {
-            // iOS Safari: Simple fade-in for hero list items
-            if (isIOSSafari()) {
-                gsap.to(heroListItems, {
-                    opacity: 1,
-                    duration: 1.2,
-                    ease: "power2.out"
-                });
-            }
-
-            // H1 char animation
-            animateChars(h1Chars, 1, initListAnimation);
-
-            // H2 scroll-triggered char animations
-            h2Data.forEach(function(data) {
-                ScrollTrigger.create({
-                    trigger: data.section,
-                    start: 'top 60%',
-                    onEnter: function() {
-                        animateChars(data.chars, 1);
-                    },
-                    onLeaveBack: function() {
-                        gsap.set(data.chars, {
-                            opacity: 0,
-                            y: 20
-                        });
-                    }
-                });
-            });
-
-            // Parallax for #home-frame .picture
-            gsap.to(frameTop, {
-                y: 100,
-                ease: "none",
-                scrollTrigger: {
-                    trigger: '#home-frame',
-                    start: 'top 90%',
-                    end: 'bottom 20%',
-                    scrub: 1.5,
-                }
-            });
-
-            gsap.to(frameTop, {
-                opacity: 1,
-                ease: "power1.inOut",
-                scrollTrigger: {
-                    trigger: '#home-frame',
-                    start: 'top 90%',
-                    end: 'top 20%',
-                    scrub: 1.5,
-                    onLeaveBack: function() {
-                        gsap.to(frameTop, {
-                            opacity: 0,
-                            duration: 0.8,
-                            ease: "power1.inOut"
-                        });
-                    }
-                }
-            });
-
-            // Gallery items fade-in
-            galleryItems.forEach(function(item) {
-                gsap.to(item, {
+            // Hero title + photos fan-out from the centre
+            var heroTl = gsap.timeline();
+            heroTl.to(heroTitleLines, {
                     opacity: 1,
                     y: 0,
                     duration: 1,
-                    ease: "power2.out",
-                    scrollTrigger: {
-                        trigger: item,
-                        start: 'top 70%',
-                        toggleActions: 'play none none reverse'
+                    stagger: 0.15,
+                    ease: 'power3.out'
+                })
+                .fromTo(heroListItems[2], {
+                    opacity: 0,
+                    y: 40,
+                    scale: 0.95
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    scale: 1,
+                    duration: 0.8,
+                    ease: 'power2.out'
+                }, '-=0.5')
+                .fromTo([heroListItems[1], heroListItems[3]], {
+                    opacity: 0,
+                    x: function(i) {
+                        return i === 0 ? 160 : -160;
                     }
-                });
-            });
-
-            // Footer SVG drawing animation
-            if (footerSvgPath) {
-                var svgTl = gsap.timeline({
-                    scrollTrigger: {
-                        trigger: 'footer svg',
-                        start: 'top 80%',
-                        toggleActions: 'play none none reverse'
+                }, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.9,
+                    ease: 'power3.out'
+                }, '-=0.5')
+                .fromTo([heroListItems[0], heroListItems[4]], {
+                    opacity: 0,
+                    x: function(i) {
+                        return i === 0 ? 260 : -260;
                     }
-                });
+                }, {
+                    opacity: 1,
+                    x: 0,
+                    duration: 0.9,
+                    ease: 'power3.out'
+                }, '-=0.7');
 
-                svgTl.to(footerSvgPath, {
-                    strokeDashoffset: 0,
-                    fill: '#DBC2A3',
-                    strokeWidth: 0,
-                    duration: 3,
-                    ease: "power1.inOut"
-                });
-
+            // Section titles – char by char
+            h2Data.forEach(function(data) {
                 ScrollTrigger.create({
-                    trigger: 'footer svg',
-                    start: 'top 80%',
-                    onLeaveBack: function() {
-                        svgTl.timeScale(4);
-                        svgTl.reverse();
-                    },
+                    trigger: data.trigger,
+                    start: data.start,
                     onEnter: function() {
-                        svgTl.timeScale(1);
-                        svgTl.play();
+                        data.reveal.timeScale(1).play();
+                    },
+                    onLeaveBack: function() {
+                        data.reveal.timeScale(3).reverse();
                     }
                 });
-            }
-        }
-
-        function initListAnimation() {
-            // Skip animation on iOS Safari
-            if (isIOSSafari()) {
-                return;
-            }
-
-            gsap.set(heroListItems, {
-                opacity: 0
-            });
-            gsap.set([heroListItems[0], heroListItems[1]], {
-                x: 200
-            });
-            gsap.set([heroListItems[3], heroListItems[4]], {
-                x: -200
             });
 
-            var tl = gsap.timeline({
+            // Fade-up blocks
+            gsap.utils.toArray('.script, .line, .lead, #home-about .text p, #home-about .picture, footer .wrapper > *:not(h2)')
+                .forEach(function(el) {
+                    gsap.from(el, {
+                        opacity: 0,
+                        y: 30,
+                        duration: 1,
+                        ease: 'power2.out',
+                        scrollTrigger: {
+                            trigger: el,
+                            start: 'top 90%',
+                            toggleActions: 'play none none reverse'
+                        }
+                    });
+                });
+
+            // Story cards
+            gsap.from('#home-stories > ul > li', {
+                opacity: 0,
+                y: 40,
+                duration: 0.8,
+                stagger: 0.15,
+                ease: 'power2.out',
                 scrollTrigger: {
-                    trigger: '#home-hero ul',
-                    start: 'top 50%',
-                    toggleActions: 'play none none reverse',
-                    onLeaveBack: function() {
-                        gsap.to(heroListItems, {
-                            opacity: 0,
-                            duration: 0.3,
-                            ease: "power2.out",
-                            onComplete: function() {
-                                tl.progress(0);
-                            }
-                        });
-                    }
+                    trigger: '#home-stories > ul',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
                 }
             });
 
-            tl.to(heroListItems[2], {
-                    opacity: 1,
-                    duration: 0.6,
-                    ease: "power2.out"
-                })
-                .to([heroListItems[0], heroListItems[1]], {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.8,
-                    stagger: 0.15,
-                    ease: "power2.out"
-                }, "-=0.2")
-                .to([heroListItems[3], heroListItems[4]], {
-                    opacity: 1,
-                    x: 0,
-                    duration: 0.8,
-                    stagger: 0.15,
-                    ease: "power2.out"
-                }, "<");
-        }
+            // Gallery items
+            gsap.utils.toArray('#home-gallery .row ul.col li').forEach(function(item) {
+                gsap.from(item, {
+                    opacity: 0,
+                    y: 40,
+                    duration: 1,
+                    ease: 'power2.out',
+                    scrollTrigger: {
+                        trigger: item,
+                        start: 'top 90%',
+                        toggleActions: 'play none none reverse'
+                    }
+                });
+            });
 
-        //
+            // Reviews
+            gsap.from('#home-reviews .track', {
+                opacity: 0,
+                y: 40,
+                duration: 1.2,
+                ease: 'power2.out',
+                scrollTrigger: {
+                    trigger: '#home-reviews',
+                    start: 'top 85%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+
+            // Footer name
+            gsap.from('footer h2 span', {
+                opacity: 0,
+                yPercent: 30,
+                duration: 1.2,
+                stagger: 0.15,
+                ease: 'power3.out',
+                scrollTrigger: {
+                    trigger: 'footer h2',
+                    start: 'top 95%',
+                    toggleActions: 'play none none reverse'
+                }
+            });
+        }
 
         // Loading overlay
         const loadingOverlay = document.getElementById('loading-overlay');
@@ -1522,6 +1140,8 @@
         window.addEventListener('load', function() {
             const elapsed = Date.now() - loadStart;
             const remaining = Math.max(0, 2000 - elapsed);
+
+            ScrollTrigger.refresh();
 
             setTimeout(function() {
                 gsap.to(loadingOverlay, {

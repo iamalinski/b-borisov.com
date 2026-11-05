@@ -1,0 +1,21 @@
+<svg width="188" height="3" viewBox="0 0 188 3" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Home NEW">
+<g clip-path="url(#clip0_0_1)">
+<g id="4">
+<line id="Line 427" y1="1.5" x2="188" y2="1.5" stroke="url(#paint0_linear_0_1)" stroke-width="3"/>
+</g>
+</g>
+</g>
+<defs>
+<linearGradient id="paint0_linear_0_1" x1="0" y1="3.5" x2="188" y2="3.5" gradientUnits="userSpaceOnUse">
+<stop stop-color="white"/>
+<stop offset="0.245192" stop-color="#A98F5F"/>
+<stop offset="0.504808" stop-color="#F7F0DD"/>
+<stop offset="0.793269" stop-color="#A8906C"/>
+<stop offset="1" stop-color="white"/>
+</linearGradient>
+<clipPath id="clip0_0_1">
+<rect x="-868" y="-6399" width="1924" height="10461" fill="white"/>
+</clipPath>
+</defs>
+</svg>
