@@ -332,7 +332,7 @@
                                         <div class="paper">
                                             <strong>Стандарт</strong>
                                             <ul>
-                                                <li class="short">8 снимачни часа</li>
+                                                <li>8 снимачни часа</li>
                                                 <li>Пълен документален разказ на деня</li>
                                                 <li>600+ кадъра</li>
                                                 <li>Обработка на всички кадри</li>
@@ -351,7 +351,7 @@
                                                 class="badge">
                                             <strong>Премиум</strong>
                                             <ul>
-                                                <li class="short">10 снимачни часа</li>
+                                                <li>10 снимачни часа</li>
                                                 <li>Пълен документален разказ на деня</li>
                                                 <li>800+ кадъра</li>
                                                 <li>Обработка на всички кадри</li>
@@ -389,15 +389,12 @@
                                 </span>
                             </div>
                             <div class="body">
-                                {{-- TODO: content pending from the client – placeholder uses the previous baptism packages --}}
                                 <div class="packages">
                                     <div class="package">
                                         <div class="paper">
                                             <strong>Ритуал</strong>
                                             <ul>
-                                                <li class="short">200+ кадъра</li>
-                                                <li>Заснемане на ритуала</li>
-                                                <li>Снимки с гостите</li>
+                                                <li>200+ кадъра (Заснемане на ритуала, <span>Снимки с гостите)</span></li>
                                                 <li>Обработка на всички кадри</li>
                                                 <li>Сет от подбрани снимки до 7 дни <span>след събитието</span></li>
                                                 <li>Дигитална галерия + електронен <span>носител (флаш памет)</span></li>
@@ -406,30 +403,29 @@
                                             <b class="price">200 €</b>
                                         </div>
                                     </div>
-                                    <div class="package premium">
+                                    <div class="package">
                                         <div class="paper">
-                                            <img src="{{ asset('images/home/icons/premium.svg') }}" alt=""
-                                                class="badge">
                                             <strong>Разширен</strong>
                                             <ul>
-                                                <li class="short">4 снимачни часа</li>
+                                                <li>4 снимачни часа</li>
                                                 <li>400+ кадъра</li>
                                                 <li>Заснемане на ритуала</li>
                                                 <li>Заснемане на празненство</li>
                                                 <li>Обработка на всички кадри</li>
                                                 <li>Сет от подбрани снимки до 7 дни <span>след събитието</span></li>
                                                 <li>Дигитална галерия + електронен <span>носител (флаш памет)</span></li>
-                                                <li>До 20 дни срок за получаване</li>
+                                                <li>До 14 дни срок за получаване</li>
+                                                <li>Възможност за удължаване на <span>снимачния ден</span></li>
                                             </ul>
-                                            <b class="price">350 €</b>
+                                            <b class="price">300 €</b>
                                         </div>
                                     </div>
                                 </div>
                                 <ul class="extras">
                                     <li>Овъртайм — 80 €/час</li>
-                                    <li>Експресно изпращане на снимките (за 10 дни) — 200 €</li>
-                                    <li>Луксозен фотоалбум с 30 избрани кадъра 15х20 см — 70 €</li>
+                                    <li>Експресно изпращане на снимките (за 5 дни) — 100 €</li>
                                     <li>Изготвяне на индивидуален пакет</li>
+                                    <li>Транспорта на повече от 100 км от Велико Търново се поема от клиента</li>
                                 </ul>
                             </div>
                         </li>
@@ -816,69 +812,142 @@
         }));
 
         // === Services accordion ===
-        document.querySelectorAll('#home-services ul.services > li').forEach(function(item) {
-            var head = item.querySelector('.head');
+        // Only one service is open at a time; clicking the open one closes it, so both can be closed.
+        var serviceItems = Array.prototype.slice.call(document.querySelectorAll('#home-services ul.services > li'));
+
+        var serviceScroll;
+
+        // Scrolls (smoothly) so the opened service starts at the top of the screen.
+        // The target is where the service will sit once the other service has finished closing.
+        function scrollToService(item) {
+            var target = smoother.offset(item, 'top top');
+            serviceItems.forEach(function(other) {
+                if (other !== item && other.classList.contains('expanded') &&
+                    (other.compareDocumentPosition(item) & Node.DOCUMENT_POSITION_FOLLOWING)) {
+                    target -= other.querySelector('.body').offsetHeight;
+                }
+            });
+            stopServiceScroll();
+            serviceScroll = gsap.to(smoother, {
+                scrollTop: Math.max(0, target),
+                duration: prefersReducedMotion ? 0.01 : 1.1,
+                ease: 'power3.inOut',
+                onComplete: function() {
+                    serviceScroll = null;
+                }
+            });
+        }
+
+        function stopServiceScroll() {
+            if (serviceScroll) {
+                serviceScroll.kill();
+                serviceScroll = null;
+            }
+        }
+
+        // The user takes over the moment they scroll themselves
+        ['wheel', 'touchstart', 'keydown'].forEach(function(type) {
+            window.addEventListener(type, stopServiceScroll, {
+                passive: true
+            });
+        });
+
+        function collapseService(item) {
             var body = item.querySelector('.body');
+            var startHeight = body.offsetHeight;
+
+            gsap.killTweensOf(body);
+            item.classList.remove('expanded');
+            item.classList.add('collapsing');
+            gsap.fromTo(body, {
+                height: startHeight
+            }, {
+                height: 0,
+                paddingBottom: 0,
+                duration: 0.6,
+                ease: 'power3.inOut',
+                onComplete: function() {
+                    item.classList.remove('collapsing');
+                    gsap.set(body, {
+                        clearProps: 'height,paddingBottom'
+                    });
+                    ScrollTrigger.refresh();
+                }
+            });
+        }
+
+        function expandService(item) {
+            var body = item.querySelector('.body');
+            var packages = body.querySelectorAll('.package');
+            var extras = body.querySelectorAll('.extras li');
+            // Starts from 0 when closed, or from the current height when a close is interrupted
+            var startHeight = body.offsetHeight;
+            var startPadding = startHeight ? parseFloat(getComputedStyle(body).paddingBottom) : 0;
+
+            gsap.killTweensOf(body);
+            item.classList.remove('collapsing');
+            item.classList.add('expanded');
+            gsap.set(body, {
+                clearProps: 'height,paddingBottom'
+            });
+            var endPadding = parseFloat(getComputedStyle(body).paddingBottom) || 0;
+            gsap.timeline({
+                    onComplete: function() {
+                        ScrollTrigger.refresh();
+                    }
+                })
+                .fromTo(body, {
+                    height: startHeight,
+                    paddingBottom: startPadding
+                }, {
+                    height: 'auto',
+                    paddingBottom: endPadding,
+                    duration: 0.7,
+                    ease: 'power3.out',
+                    clearProps: 'height,paddingBottom'
+                })
+                .fromTo(packages, {
+                    opacity: 0,
+                    y: 40,
+                    rotateX: -8,
+                    transformPerspective: 1200
+                }, {
+                    opacity: 1,
+                    y: 0,
+                    rotateX: 0,
+                    transformPerspective: 1200,
+                    duration: 0.7,
+                    stagger: 0.15,
+                    ease: 'power2.out',
+                    clearProps: 'transform,opacity'
+                }, '-=0.45')
+                .from(extras, {
+                    opacity: 0,
+                    y: 12,
+                    duration: 0.4,
+                    stagger: 0.06,
+                    ease: 'power2.out',
+                    clearProps: 'transform,opacity'
+                }, '-=0.35');
+        }
+
+        serviceItems.forEach(function(item) {
+            var head = item.querySelector('.head');
 
             head.addEventListener('click', function() {
-                var isExpanded = item.classList.contains('expanded');
-
-                if (isExpanded) {
-                    gsap.fromTo(body, {
-                        height: body.offsetHeight
-                    }, {
-                        height: 0,
-                        duration: 0.6,
-                        ease: 'power3.inOut',
-                        onComplete: function() {
-                            item.classList.remove('expanded');
-                            gsap.set(body, {
-                                clearProps: 'height'
-                            });
-                            ScrollTrigger.refresh();
-                        }
-                    });
+                if (item.classList.contains('expanded')) {
+                    // Closing never scrolls
+                    stopServiceScroll();
+                    collapseService(item);
                     return;
                 }
-
-                item.classList.add('expanded');
-                var packages = body.querySelectorAll('.package');
-                var extras = body.querySelectorAll('.extras li');
-
-                gsap.timeline({
-                        onComplete: function() {
-                            ScrollTrigger.refresh();
-                        }
-                    })
-                    .from(body, {
-                        height: 0,
-                        duration: 0.7,
-                        ease: 'power3.out',
-                        clearProps: 'height'
-                    })
-                    .fromTo(packages, {
-                        opacity: 0,
-                        y: 40,
-                        rotateX: -8,
-                        transformPerspective: 1200
-                    }, {
-                        opacity: 1,
-                        y: 0,
-                        rotateX: 0,
-                        transformPerspective: 1200,
-                        duration: 0.7,
-                        stagger: 0.15,
-                        ease: 'power2.out',
-                        clearProps: 'transform,opacity'
-                    }, '-=0.45')
-                    .from(extras, {
-                        opacity: 0,
-                        y: 12,
-                        duration: 0.4,
-                        stagger: 0.06,
-                        ease: 'power2.out',
-                        clearProps: 'transform,opacity'
-                    }, '-=0.35');
+                scrollToService(item);
+                serviceItems.forEach(function(other) {
+                    if (other !== item && other.classList.contains('expanded')) {
+                        collapseService(other);
+                    }
+                });
+                expandService(item);
             });
         });
 

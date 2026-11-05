@@ -926,6 +926,10 @@ section#home-services {
                 }
             }
 
+            &.collapsing .body {
+                display: block;
+            }
+
             & + li:not(.expanded) {
                 background-image: url('../../public/images/home/icons/line-service-bottom.svg');
                 background-position: bottom center;
@@ -1057,6 +1061,9 @@ section#home-services {
             }
 
             ul {
+                display: flex;
+                flex-direction: column;
+                gap: 7px;
                 width: 287px;
                 margin-top: 5.4px;
                 margin-left: -6px;
@@ -1066,16 +1073,11 @@ section#home-services {
                     @include hanging-bullet;
                     font-family: "Cormorant Garamond Regular", serif;
                     font-size: 18px;
-                    line-height: 1.5;
+                    line-height: 1.1;
                     color: $olive;
-
-                    &.short {
-                        line-height: 1;
-                    }
 
                     span {
                         display: block;
-                        line-height: 1;
                     }
                 }
             }
