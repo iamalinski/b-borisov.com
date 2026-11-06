@@ -105,17 +105,6 @@
 </head>
 
 <body>
-    <div class="loading-overlay" id="loading-overlay">
-        <div class="brand">
-            <img src="{{ asset('images/app/loading-brand.svg') }}" alt="Boris Borisov Photography">
-            <div>
-                <span>
-                    Boris Borisov
-                </span>
-                Photography
-            </div>
-        </div>
-    </div>
     <div class="menu-overlay" aria-hidden="true">
         <div class="header">
             <a href="{{ route('home') }}" class="brand">
@@ -430,6 +419,14 @@
                             </div>
                         </li>
                     </ul>
+                    <script>
+                        // Mobile: both services start closed (runs before the first paint, so there is no flash)
+                        if (window.matchMedia('(max-width: 760px)').matches) {
+                            document.querySelectorAll('#home-services ul.services > li.expanded').forEach(function(item) {
+                                item.classList.remove('expanded');
+                            });
+                        }
+                    </script>
                 </section>
                 <section id="home-about">
                     <div class="container">
@@ -574,11 +571,37 @@
         var prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
         // === Smooth scrolling ===
-        var smoother = ScrollSmoother.create({
+        // Touch-only devices keep their native scrolling. ScrollSmoother would not smooth there anyway
+        // (smoothTouch: false), and in that mode ScrollTrigger measures wrong positions when it refreshes
+        // away from the top (e.g. after a service opens/closes), which hid sections while scrolling back up.
+        // The native fallback exposes the same small API the page uses.
+        function createNativeScroller() {
+            return {
+                scrollTop: function(value) {
+                    if (value === undefined) return window.scrollY;
+                    window.scrollTo(0, value);
+                },
+                offset: function(element) {
+                    return element.getBoundingClientRect().top + window.scrollY;
+                },
+                scrollTo: function(target, smooth) {
+                    var element = typeof target === 'string' ? document.querySelector(target) : target;
+                    window.scrollTo({
+                        top: element.getBoundingClientRect().top + window.scrollY,
+                        behavior: smooth ? 'smooth' : 'auto'
+                    });
+                },
+                paused: function(isPaused) {
+                    document.documentElement.style.overflow = isPaused ? 'hidden' : '';
+                    document.body.style.overflow = isPaused ? 'hidden' : '';
+                }
+            };
+        }
+
+        var smoother = ScrollTrigger.isTouch === 1 ? createNativeScroller() : ScrollSmoother.create({
             wrapper: '#smooth-wrapper',
             content: '#smooth-content',
             smooth: prefersReducedMotion ? 0 : 1.2,
-            smoothTouch: false,
             effects: true
         });
 
@@ -646,7 +669,7 @@
             }, delay || 0);
         }
 
-        // === Presets (run immediately, before the loading overlay hides) ===
+        // === Presets ===
 
         var heroTitleLines = document.querySelectorAll('#home-hero h1 > *');
         var heroListItems = document.querySelectorAll('#home-hero ul li');
@@ -675,20 +698,15 @@
         });
 
         // === Endless loops (marquee bar + reviews) ===
-        // Clones the list until it covers the viewport twice and moves it with the GSAP ticker.
-        //  - followScroll: direction follows the scroll, speed grows with scroll velocity and the track leans (skew)
-        //  - hoverSpeed: speed factor while hovered/touched (0 = stops), eased in and out for a soft feel
+        // Clones the list until it covers the viewport twice and moves it at a constant speed with the GSAP ticker.
+        //  - direction: 1 = right to left, -1 = left to right
         function createLoop(section, options) {
             var track = section.querySelector('.track');
             var source = track.querySelector('ul');
             var groupWidth = 0;
             var x = options.startX || 0;
-            var direction = 1;
-            var baseSpeed = prefersReducedMotion ? options.speed * 0.25 : options.speed; // px per second
-            var boost = 0;
-            var hoverFactor = 1;
-            var hoverTarget = 1;
-            var skewSetter = gsap.quickSetter(track, 'skewX', 'deg');
+            var direction = options.direction || 1;
+            var speed = prefersReducedMotion ? options.speed * 0.25 : options.speed; // px per second
             var xSetter = gsap.quickSetter(track, 'x', 'px');
             var isVisible = true;
 
@@ -717,22 +735,7 @@
                 resizeTimer = setTimeout(build, 150);
             });
 
-            function hold() {
-                hoverTarget = options.hoverSpeed;
-            }
-
-            function release() {
-                hoverTarget = 1;
-            }
-            track.addEventListener('mouseenter', hold);
-            track.addEventListener('mouseleave', release);
-            track.addEventListener('touchstart', hold, {
-                passive: true
-            });
-            track.addEventListener('touchend', function() {
-                setTimeout(release, 1200);
-            });
-
+            // Only animate while on screen
             ScrollTrigger.create({
                 trigger: section,
                 start: 'top bottom',
@@ -744,38 +747,21 @@
 
             gsap.ticker.add(function(time, deltaTime) {
                 if (!isVisible || !groupWidth) return;
-
-                var velocity = options.followScroll ? smoother.getVelocity() : 0;
-                if (options.followScroll && Math.abs(velocity) > 5) {
-                    direction = velocity > 0 ? 1 : -1;
-                }
-                var targetBoost = prefersReducedMotion ? 0 : Math.min(Math.abs(velocity) / 300, 8);
-                boost += (targetBoost - boost) * 0.08;
-                hoverFactor += (hoverTarget - hoverFactor) * 0.05;
-
                 var dt = Math.min(deltaTime, 50) / 1000;
-                x -= direction * baseSpeed * (1 + boost) * hoverFactor * dt;
-                x = gsap.utils.wrap(-groupWidth, 0, x);
+                x = gsap.utils.wrap(-groupWidth, 0, x - direction * speed * dt);
                 xSetter(x);
-
-                if (options.followScroll && !prefersReducedMotion) {
-                    skewSetter(gsap.utils.clamp(-8, 8, -velocity / 400) * (boost > 0.05 ? 1 : 0));
-                }
             });
         }
 
         createLoop(document.querySelector('#home-marquee'), {
             speed: 60,
-            startX: -17,
-            followScroll: true,
-            hoverSpeed: 0.25
+            direction: -1,
+            startX: -17
         });
 
         createLoop(document.querySelector('#home-reviews'), {
             speed: 45,
-            startX: -10,
-            followScroll: false,
-            hoverSpeed: 0
+            startX: -10
         });
 
         // === The hero stays put while the page slides over it ===
@@ -802,14 +788,20 @@
                 ease: 'none'
             }, 0);
 
-        ScrollTrigger.create(heroPin({
-            pin: '#home-hero',
-            scrub: true,
-            animation: prefersReducedMotion ? null : heroRecede
-        }));
-        ScrollTrigger.create(heroPin({
-            pin: 'header'
-        }));
+        // Desktop only – on mobile the hero simply scrolls away with the page
+        gsap.matchMedia().add('(min-width: 761px)', function() {
+            ScrollTrigger.create(heroPin({
+                pin: '#home-hero',
+                scrub: true,
+                animation: prefersReducedMotion ? null : heroRecede
+            }));
+            ScrollTrigger.create(heroPin({
+                pin: 'header'
+            }));
+            return function() {
+                heroRecede.progress(0);
+            };
+        });
 
         // === Services accordion ===
         // Only one service is open at a time; clicking the open one closes it, so both can be closed.
@@ -1069,7 +1061,7 @@
         });
         document.querySelector('footer .bottom .left span').addEventListener('click', openAuthorRightsPopup);
 
-        // === Animation triggers (run after the loading overlay hides) ===
+        // === Animation triggers ===
 
         function initAnimations() {
             // Hero title + photos fan-out from the centre
@@ -1139,7 +1131,9 @@
                         ease: 'power2.out',
                         scrollTrigger: {
                             trigger: el,
-                            start: 'top 90%',
+                            // clamp(): elements near the very end of the page (footer copyright) still
+                            // reveal even though the page cannot scroll far enough to reach 90%
+                            start: 'clamp(top 90%)',
                             toggleActions: 'play none none reverse'
                         }
                     });
@@ -1202,27 +1196,10 @@
             });
         }
 
-        // Loading overlay
-        const loadingOverlay = document.getElementById('loading-overlay');
-        const loadStart = Date.now();
-
+        // Start right away; measure again once every image has loaded
+        initAnimations();
         window.addEventListener('load', function() {
-            const elapsed = Date.now() - loadStart;
-            const remaining = Math.max(0, 2000 - elapsed);
-
             ScrollTrigger.refresh();
-
-            setTimeout(function() {
-                gsap.to(loadingOverlay, {
-                    opacity: 0,
-                    duration: 0.8,
-                    ease: 'power3.inOut',
-                    onComplete: function() {
-                        loadingOverlay.remove();
-                        initAnimations();
-                    }
-                });
-            }, remaining);
         });
     </script>
 

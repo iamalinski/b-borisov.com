@@ -458,64 +458,6 @@ header {
     }
 }
 
-.loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: 99999;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background-image: radial-gradient(circle at center, #6A5F53 0%, #51483F 100%);
-
-    div.brand {
-        display: flex;
-        align-items: center;
-        flex-direction: column;
-        gap: 1px;
-        width: fit-content;
-        animation: fadeIn 1s ease forwards;
-
-        img {
-            display: block;
-            width: 100px;
-        }
-
-        div {
-            font-family: "Century Gothic", sans-serif;
-            font-size: 13px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-transform: uppercase;
-            letter-spacing: 1.5px;
-            color: #A6917C;
-
-            span {
-                font-family: "Arsenica Trial Regular", sans-serif;
-                text-transform: inherit;
-                font-size: 21px;
-                line-height: 1;
-                display: block;
-                letter-spacing: 0.4px;
-                color: #A6917C;
-            }
-        }
-    }
-
-    @keyframes fadeIn {
-        0% {
-            opacity: 0;
-        }
-
-        100% {
-            opacity: 1;
-        }
-    }
-}
-
 // ============ Hero: always fits the screen (hero + marquee = viewport height) ============
 // Figma: hero content is 930px tall above a 96px marquee (1026px total).
 // Every hero dimension scales with the space left above the marquee, capped at the Figma size
@@ -1896,9 +1838,30 @@ footer {
         }
     }
 
+    // Hero + marquee fill the screen like on desktop; the title and photos sit centred
+    // between the header and the marquee
+    .hero-wrapper {
+        height: 100vh;
+        height: max(520px, 100svh);
+        container-type: size;
+    }
+
     section#home-hero {
-        padding-top: 130px;
-        padding-bottom: 40px;
+        justify-content: center;
+        padding-top: 105px; // header height
+        padding-bottom: 0;
+    }
+
+    // Hairline gold underlines on small screens
+    section#home-quote .line,
+    section#home-stories .line,
+    section#home-services .line,
+    footer .wrapper .line {
+        height: 1px;
+    }
+
+    footer {
+        padding-bottom: 20px;
     }
 
     // Compact bar: ~60% scale so more events are visible at once
@@ -1962,6 +1925,54 @@ footer {
 
         .packages {
             zoom: 0.58;
+        }
+
+        // Simpler paper (ornaments only in the corners, Figma 2530:55) leaves room for larger text.
+        // Values are in card pixels – the whole card is zoomed to 0.58.
+        .package {
+            // grows with the larger text instead of a fixed card height
+            height: auto;
+            min-height: 750px;
+
+            .paper {
+                height: auto;
+                min-height: 706px;
+                padding: 92px 0 84px;
+                // 9-slice: the four ornamented corners (230px of the 1024×1280 image) keep their shape,
+                // only the plain frame lines between them stretch – nothing is cropped at any card height
+                background-image: none;
+                border: 0 solid transparent;
+                border-image: url('../../public/images/home/services/card-paper-mobile.jpg') 230 fill / 127px / 0 stretch;
+            }
+
+            .badge {
+                width: 36px;
+                height: 36px;
+                margin-top: 0;
+            }
+
+            strong,
+            .price {
+                font-size: 50px;
+            }
+
+            .price {
+                padding-top: 40px;
+            }
+
+            ul {
+                width: 410px;
+                gap: 10px;
+                margin-top: 14px;
+
+                li {
+                    font-size: 25px;
+                }
+            }
+
+            &.premium ul {
+                width: 410px;
+            }
         }
 
         .extras li {
@@ -2055,6 +2066,7 @@ footer {
                 flex-direction: column-reverse;
                 align-items: center;
                 gap: 8px;
+                margin-top: 4px;
 
                 .left,
                 .right {
