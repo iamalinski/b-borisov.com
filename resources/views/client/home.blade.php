@@ -803,6 +803,43 @@
             };
         });
 
+        // === Gallery on mobile ===
+        // The phone layout shows two of the three columns. Instead of losing the first column's photos,
+        // each of them is moved to whichever visible column is shorter at that moment (heights come from
+        // the width/height attributes, so this works before the lazy images load). Wider screens get
+        // every photo back in its original place.
+        gsap.matchMedia().add('(max-width: 760px)', function() {
+            var columns = Array.prototype.slice.call(document.querySelectorAll('#home-gallery .row ul.col'));
+            var hiddenColumn = columns[0];
+            var targets = columns.slice(1);
+            var moved = Array.prototype.slice.call(hiddenColumn.children);
+
+            function photoRatio(li) {
+                var img = li.querySelector('img');
+                return img.getAttribute('height') / img.getAttribute('width');
+            }
+
+            var heights = targets.map(function(column) {
+                return Array.prototype.reduce.call(column.children, function(sum, li) {
+                    return sum + photoRatio(li);
+                }, 0);
+            });
+
+            moved.forEach(function(li) {
+                var shortest = heights[0] <= heights[1] ? 0 : 1;
+                targets[shortest].appendChild(li);
+                heights[shortest] += photoRatio(li);
+            });
+            ScrollTrigger.refresh();
+
+            return function() {
+                moved.forEach(function(li) {
+                    hiddenColumn.appendChild(li);
+                });
+                ScrollTrigger.refresh();
+            };
+        });
+
         // === Services accordion ===
         // Only one service is open at a time; clicking the open one closes it, so both can be closed.
         var serviceItems = Array.prototype.slice.call(document.querySelectorAll('#home-services ul.services > li'));
